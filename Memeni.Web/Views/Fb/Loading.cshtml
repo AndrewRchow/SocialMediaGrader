@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Loading";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <title>Facebook Grade</title>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/vendor/bootstrap/bootstrap.min.css">
+    <!-- CSS Unify -->
+    <link rel="stylesheet" href="~/assets/css/unify.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <style>
+        #loader {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .alert-danger {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+<body ng-controller="FbController as FbCtrl">
+
+    <img ng-hide="FbCtrl.error" id="loader" src="~/assets/loader-icons/loader-128x/Preloader_8a.gif" />
+
+    <!--Use below portion if the loading page installs the widget-->
+    @*<h1 ng-show="FbCtrl.ready">Done!</h1>
+    <button ng-show="FbCtrl.ready" class="btn btn-success">See My Grade</button>*@
+
+    <div class="alert alert-danger" ng-show="FbCtrl.error" role="alert" ng-cloak>
+        <h2><i class="fa fa-minus-circle"></i> Error!</h2>
+        <h4>The Facebook profile you searched is <br /><strong>Not Valid</strong>!</h4>
+        <ul class="fa-ul alert__icon g-mt-10">
+            <li class="h4"><i class="fa-li alert__icon-list fa fa-check"></i>You will be redirected back to our Grader</li>
+        </ul>
+    </div>
+
+    <!-- JS Global Compulsory -->
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/vendor/tether.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <!-- JS Custom -->
+    <script src="~/assets/js/custom.js"></script>
+
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/Scripts/angular-chart.min.js")
+    @Scripts.Render("~/plugins/angular-toastr")
+
+    @Scripts.Render("~/bundles/mainApp")
+    @Scripts.Render("~/Scripts/Facebook/FbCtrl.js")
+    @Scripts.Render("~/Scripts/Facebook/FbService.js")
+</body>
+</html>

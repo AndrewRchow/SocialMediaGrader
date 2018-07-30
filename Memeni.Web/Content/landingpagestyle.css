@@ -1,0 +1,296 @@
+﻿#socialIcons {
+    margin-left:3%
+}
+
+.g-bg-bluegray-opacity-0_3--after::after {
+    background-color: transparent !important;
+}
+
+main, body {
+    background-color: #0B5A85;
+}
+
+.u-btn-white:focus, .u-btn-white.active {
+    color: #fff;
+    background-color: transparent;
+}
+
+hr {
+    display: none;
+}
+
+.container {
+    width: auto;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.smglogo {
+    cursor: pointer;
+    width: 20em;
+}
+
+md-input-container.md-default-theme:not(.md-input-focused):not(.md-input-invalid) label.md-required:after, md-input-container:not(.md-input-focused):not(.md-input-invalid) label.md-required:after {
+    color: white;
+}
+
+/******Landing Page Buttons******/
+.floating-box {
+    float: right;
+}
+
+.lpHomeBtn {
+    margin-top: 1%;
+    margin-right: 5px;
+}
+
+.lpLogoutBtn {
+    margin-top: 1%;
+    margin-right: 15%;
+}
+
+#lpLoginBtn {
+    margin-top: 1%;
+    margin-right: 15%;
+}
+
+.u-btn-white {
+    color: #fff;
+    background-color: transparent;
+    background-color: transparent;
+    font-size: .6em;
+    border-radius: 27px;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    margin-top: 3em;
+    text-transform: uppercase;
+    padding: 5px 20px;
+}
+
+/******Main Text Style******/
+h1.main-text {
+    font-family: 'Merriweather', 'Open Sans', serif;
+    font-weight: bold;
+    margin-top: 15px;
+    color: white;
+    font-size: 4em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+header {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+
+/******Input box style******/
+.website-input input {
+    background-color: rgba(255, 255, 255, 0.00);
+    color: white;
+    border: 0;
+    border-bottom: 2px solid white;
+    font-size: 2em;
+    text-align: center;
+    transition: all 0.3s;
+    width: 20em;
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    font-weight: 500;
+    color: white;
+    cursor: default;
+}
+
+.website-input label span.label-text.expanded {
+    color: white;
+    cursor: text;
+    font-size: 20px;
+    -webkit-transform: translateY(44px);
+    transform: translateY(44px);
+}
+
+.website-input label {
+    color: white;
+    margin-left:1%;
+}
+
+    .website-input label span.label-text {
+        color: white;
+        line-height: 20px;
+        margin-bottom: 0;
+        transition: color 0.3s,font-size 0.3s,transform 0.3s;
+    }
+
+md-input-container {
+    margin: .7em 0px;
+    padding: 0px;
+    font-size: .8em;
+}
+
+    md-input-container label {
+        font-size: 2em;
+    }
+
+    md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+        transform-origin: top;
+        font-size: 1.5em;
+    }
+
+    md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+        border-color: white;
+        color: white;
+        font-size: 2.3em;
+    }
+
+    md-input-container:not(.md-input-invalid).md-input-focused label {
+        color: white;
+        font-size: 1.5em;
+    }
+
+    md-input-container:not(.md-input-invalid).md-input-has-value label {
+        color: white;
+        font-size: 1.5em;
+    }
+
+.urlRow {
+    margin-top:28px;
+}
+.emailRow {
+}
+.website-input .error-text {
+    display: block;
+    color: #ff0000;
+    font-size: 1.1em;
+    width: 25em;
+    margin-left:20%;
+}
+
+md-input-container .md-input.ng-invalid.ng-dirty {
+    font-size: 2.3em;
+}
+/**********Button Style***********/
+.landingBtn {
+    background-color: white;
+    font-size: 1em;
+    border-radius: 35px;
+    border: 2px solid white;
+    color: #0B5A85;
+    margin-top: 3em;
+    text-transform: uppercase;
+    padding: 1.4em 3em;
+    font-weight:bold;
+}
+
+    .landingBtn:hover {
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+    }
+
+    .landingBtn.btn-lg .icon-right-arrow {
+        font-size: 20px;
+        color: white;
+        left: 10px;
+        margin-right: 0;
+        position: relative;
+        top: 2px;
+    }
+
+.fa-lg {
+    vertical-align: -8%;
+}
+
+/**********SOCIAL MEDIA CUSTOMIZATIONS***********/
+.g-bg-facebook {
+    background-color: #5b81d1;
+}
+
+@media screen and (max-width: 1920px) {
+    #home {
+        zoom: 1;
+        -moz-transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    #home {
+        zoom: .99;
+        -moz-transform: scale(.99);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #home {
+        zoom: .98;
+        -moz-transform: scale(.98);
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    #home {
+        zoom: .97;
+        -moz-transform: scale(.97);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #home {
+        zoom: .96;
+        -moz-transform: scale(.96);
+    }
+}
+
+@media screen and (max-width: 769px) {
+    #home {
+        zoom: .95;
+        -moz-transform: scale(.95);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #home {
+        zoom: .94;
+        -moz-transform: scale(.94);
+    }
+}
+
+@media screen and (max-width: 415px) {
+    #home {
+        zoom: 0.93;
+        -moz-transform: scale(0.93);
+    }
+}
+
+@media screen and (max-width: 413px) {
+    #home {
+        zoom: 0.89;
+        -moz-transform: scale(0.89);
+    }
+}
+
+@media screen and (max-width: 376px) {
+    #home {
+        zoom: 0.85;
+        -moz-transform: scale(0.85);
+    }
+}
+
+@media screen and (max-width: 361px) {
+    #home {
+        zoom: 0.8;
+        -moz-transform: scale(0.8);
+    }
+}
+
+@media screen and (max-width: 330px) {
+    #home {
+        zoom: 0.7;
+        -moz-transform: scale(0.7);
+    }
+}

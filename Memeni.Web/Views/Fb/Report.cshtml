@@ -1,0 +1,597 @@
+﻿@{
+    ViewBag.Title = "Facebook Grade";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <title>Facebook Grade</title>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/vendor/bootstrap/bootstrap.min.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/assets/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-etlinefont/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-line-pro/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+    <link rel="stylesheet" href="~/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="~/assets/vendor/hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/animate.css">
+    <link rel="stylesheet" href="~/assets/vendor/jvectormap/jquery-jvectormap-2.0.3.css">
+
+    <!-- CSS Unify -->
+    <link rel="stylesheet" href="~/assets/css/unify.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <style>
+        section {
+            padding: 100px;
+        }
+
+        .progressBar {
+            width: 200px;
+        }
+
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+
+        .my-legend {
+            position: relative;
+            top: -80px;
+            left: 10px;
+        }
+
+        .my-legend .legend-title {
+            text-align: left;
+            margin-bottom: 8px;
+            /*font-weight: bold;*/
+            font-size: 90%;
+            text-shadow: 1px 1px #000;
+        }
+
+        .my-legend .legend-scale ul {
+            margin: 0;
+            padding: 0;
+            float: left;
+            list-style: none;
+        }
+
+        .my-legend .legend-scale ul li {
+            display: block;
+            float: left;
+            width: 50px;
+            margin-bottom: 6px;
+            text-align: center;
+            font-size: 80%;
+            list-style: none;
+            text-shadow: 1px 1px #000;
+        }
+
+        .my-legend ul.legend-labels li span {
+            display: block;
+            float: left;
+            height: 15px;
+            width: 50px;
+        }
+
+        .reachTable{
+            position: relative;
+            top: -80px;
+            margin-bottom: -100px;
+        }
+    </style>
+</head>
+<body ng-controller="FbRepController as FbRepCtrl">
+    <!-- Logo -->
+    <div class="navbar-brand g-pos-abs g-top-20 g-left-20 g-z-index-2">
+        <a style="box-shadow: 4px 4px 1px #808080" class="u-icon-v3 g-bg-facebook g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20" ng-click="FbRepCtrl.homeBtn()"><i class="fa fa-facebook"></i></a>
+    </div>
+    <!-- End Logo -->
+    <!-- Smart Menu -->
+    <div class="js-smart-menu u-smart-nav u-smart-nav--top-right g-transition-0_3" data-fix-moment="300">
+        <!-- Smart Menu Toggle Button -->
+        <button class="u-smart-nav__toggler btn u-btn-white g-pa-0" id="u-smart-menu-toggler-1"
+                aria-label="Toggle navigation"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="smart-menu-1">
+            <span class="hamburger hamburger--collapse">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </span>
+        </button>
+        <!-- End Smart Menu Toggle Button -->
+        <!-- Navbar -->
+        <nav class="navbar u-shadow-v17 g-bg-white g-rounded-10 g-pa-20 g-pb-15 g-transition-0_3" id="smart-menu-1"
+             aria-labelledby="u-smart-menu-toggler-1">
+            <ul class="navbar-nav text-uppercase">
+                <li class="nav-item">
+                    <a href="#promoBlock" class="nav-link">Grade <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#activity" class="nav-link">Activity</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#engagement" class="nav-link">Engagement</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#growth" class="nav-link">Growth</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reach" class="nav-link">Reach</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#dataCollection" class="nav-link">Data Collection</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#suggestions" class="nav-link">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#signUp" class="nav-link">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Navbar -->
+    </div>
+    <!-- End Smart Menu -->
+    <main>
+        <!-- Facebook Promo Block -->
+        <section id="promoBlock" class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall g-min-height-100vh g-flex-middle g-bg-cover g-bg-pos-center g-bg-img-hero g-bg-white-opacity-0_7--after " data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}'>
+            <div class="divimage dzsparallaxer--target w-100" style="height: 110%; background-image: url(../../../assets/img-temp/1920x1080/fbLikeImage.jpg);"></div>
+            <div class="container text-center g-bg-transparent g-z-index-1 g-py-100" ng-cloak>
+                <img ng-src="{{FbRepCtrl.profile.picture}}" style="box-shadow: 4px 4px 1px #808080; position: relative; left: 7px;" class=" g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20" />
+                <h1 class="text-uppercase g-mb-15 g-font-weight-900" style="text-shadow: 2px 2px #808080; position: relative; left: 7px; color: #65A8DC">{{FbRepCtrl.profile.name}}</h1>
+                @*<img ng-src="{{FbRepCtrl.profile.cover}}" style="box-shadow: 4px 4px 1px #000; width=200px" class=" g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20" />*@ <!--Cover Image-->
+                <h1 style="font-size: 600%;text-shadow: 2px 2px #808080;" class="text-uppercase g-letter-spacing-3 g-mb-15 g-font-weight-900" ng-class="FbRepCtrl.classColor(FbRepCtrl.grade)">{{FbRepCtrl.grade}}</h1>
+                <h4 style="text-shadow: 1px 1px #808080;" ng-class="FbRepCtrl.classColor(FbRepCtrl.grade)">{{FbRepCtrl.gradeQuote}}</h4>
+                <div class="g-mb-80" style="max-width:600px; margin: auto" ng-controller="RadarCtrl">
+                    <canvas id="radar" class="chart chart-radar" chart-data="data" chart-options="options" chart-labels="labels"></canvas>
+                </div>
+            </div>
+        </section>
+        <!-- End Promo Block -->
+        <!-- Activity Section Content -->
+        <section id="activity" class="text-center g-py-80 g-bg-white">
+            <div class="container" align="center">
+                <div class="row">
+                    <div class="g-mb-60 col-sm-12">
+                        <img class="u-image-icon-size-2xl rounded-circle g-mb-25" src="~/assets/img/icons/set-1/03.png" alt="Activity">
+                        <h1 style="font-size: 400%;" class="text-uppercase g-mb-15 g-font-weight-900 ">Activity</h1>
+                        <h1 style="font-size: 300%;" ng-cloak><strong>{{FbRepCtrl.report.activity.points}}</strong><small> / 25</small></h1>
+                        <div class="progress progressBar">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{FbRepCtrl.report.activity.points}}"
+                                 aria-valuemin="0" aria-valuemax="25" ng-style="{width: {{FbRepCtrl.report.activity_points}} + '%'}">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="line-chart" ng-controller="BarCtrl" class="col-sm-12">
+                        <!-- Default Outline Panel-->
+                        <div class="card rounded-0">
+                            <h3 class="card-header h5 rounded-0 g-bg-blue g-color-white">
+                                <i class="fa fa-tasks g-font-size-default g-mr-5"></i> Social Media Posts for the Past Week
+                            </h3>
+                            <div class="card-block">
+                                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                            </div>
+                        </div>
+                        <!-- End Default Outline Panel-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Section Content -->
+        <!-- Engagement Section Content -->
+        <section id="engagement" class="g-py-80" style="background-color: #65A8DC">
+            <div class="container" align="center">
+                <div>
+                    <div class="g-mb-60 g-color-white">
+                        <img class="u-image-icon-size-2xl rounded-circle g-mb-25" src="~/assets/img/icons/set-1/02.png" alt="Like">
+                        <h1 style="font-size: 400%;" class="text-uppercase g-mb-15 g-font-weight-900">Engagement</h1>
+                        <br />
+                        <h1 style="font-size: 300%;" ng-cloak><strong>{{FbRepCtrl.report.engagement.score}}</strong><small> / 25</small></h1>
+                        <div class="progress progressBar">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{FbRepCtrl.report.engagement.score}}"
+                                 aria-valuemin="0" aria-valuemax="25" ng-style="{width: {{FbRepCtrl.report.engagement_points}} + '%'}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="line-chart" ng-controller="LineCtrl" class="col-md-8 col-sm-12">
+                        <!-- Default Outline Panel-->
+                        <div class="card rounded-0">
+                            <h3 class="card-header h5 rounded-0 g-bg-blue g-color-white">
+                                <i class="fa fa-tasks g-font-size-default g-mr-5"></i> Social Media Engagement for the Past Week
+                            </h3>
+                            <div class="card-block">
+                                <canvas id="line" class="chart chart-line" chart-data="data"
+                                        chart-labels="labels" chart-series="series" chart-options="options"
+                                        chart-dataset-override="datasetOverride" chart-click="onClick"></canvas>
+                            </div>
+                        </div>
+                        <!-- End Default Outline Panel-->
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <ul class="list-unstyled g-bg-white">
+                            <li class="media g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+                                <div class="d-flex g-mt-2 g-mr-15">
+                                    <span class="u-icon-v3 g-color-white g-bg-blue-lineargradient rounded-circle">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total Reactions</strong>
+                                    </div>
+                                    <h3 class="d-block" ng-cloak>{{FbRepCtrl.report.engagement.total_Reactions | number}}</h3>
+                                </div>
+                            </li>
+                            <li class="media g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+                                <div class="d-flex g-mt-2 g-mr-15">
+                                    <span class="u-icon-v3 g-color-white g-bg-blue-lineargradient rounded-circle">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total Likes</strong>
+                                    </div>
+                                    <h3 class="d-block" ng-cloak>{{FbRepCtrl.report.engagement.total_Likes | number}}</h3>
+                                </div>
+                            </li>
+                            <li class="media g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+                                <div class="d-flex g-mt-2 g-mr-15">
+                                    <span class="u-icon-v3 g-color-white g-bg-blue-lineargradient rounded-circle">
+                                        <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total Comments</strong>
+                                    </div>
+                                    <h3 class="d-block" ng-cloak>{{FbRepCtrl.report.engagement.total_Comments | number}}</h3>
+                                </div>
+                            </li>
+                            <li class="media g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+                                <div class="d-flex g-mt-2 g-mr-15">
+                                    <span class="u-icon-v3 g-color-white g-bg-blue-lineargradient rounded-circle">
+                                        <i class="fa fa-share"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total Shares</strong>
+                                    </div>
+                                    <h3 class="d-block" ng-cloak>{{FbRepCtrl.report.engagement.total_Shares | number}}</h3>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Section Content -->
+        <!-- Growth Section Content -->
+        <section id="growth" class="g-pt-90">
+            <div class="container" align="center">
+                <div class="g-mb-60">
+                    <span class="d-inline-block u-icon-v3 u-icon-size--xl g-color-white g-bg-cyan-gradient-opacity-v1 rounded-circle g-mb-20">
+                        <i class="icon-finance-257 u-line-icon-pro"></i>
+                    </span>
+                    <h1 style="font-size: 400%;" class="text-uppercase g-mb-15 g-font-weight-900">Growth</h1>
+                    <h1 style="font-size: 300%;" ng-cloak><strong>{{FbRepCtrl.report2.growth.points}}</strong><small> / 25</small></h1>
+                </div>
+                <!-- Static Process -->
+                <div class="row">
+                    <div class="col-sm-6  g-mb-60">
+                        <!-- Static Process -->
+                        <div class="text-center">
+                            <i class="u-dot-line-v2-2 g-brd-transparent--before g-brd-gray-light-v2--after g-mb-15">
+                                <span class="u-dot-line-v2__inner g-bg-white--before g-brd-gray-light-v2--before"></span>
+                            </i>
+                            <i class="fa fa-line-chart fa-5x g-color-green" aria-hidden="true"></i>
+
+                            <h3 class="h5 g-font-weight-600 g-mb-10">Change in Followers</h3>
+                            <p class="mb-0"><h1 ng-cloak><strong>{{FbRepCtrl.report2.growth.percentChange|number:2}} %</strong></h1></p>
+                            <p><h5>Past Month</h5></p>
+                        </div>
+                        <!-- End Static Process -->
+                    </div>
+                    <div class="col-sm-6 g-mb-60">
+                        <!-- Static Process -->
+                        <div class="text-center">
+                            <i class="u-dot-line-v2-2 g-brd-gray-light-v2--before g-brd-transparent--after g-mb-15">
+                                <span class="u-dot-line-v2__inner g-bg-white--before g-brd-gray-light-v2--before"></span>
+                            </i>
+                            <i class="fa fa-users fa-5x g-color-blue" aria-hidden="true"></i>
+                            <h3 class="h5 g-font-weight-600 g-mb-10">Today</h3>
+                            <p class="mb-0"><h1 ng-cloak><strong>{{FbRepCtrl.report.total_likes|number}}</strong></h1></p>
+                            <p><h5>Followers</h5></p>
+                        </div>
+                        <!-- End Static Process -->
+                    </div>
+                </div>
+                <!-- End Static Process -->
+            </div>
+        </section>
+        <!-- End Section Content -->
+        <!-- Reach Section Content -->
+        <section id="reach" class="g-bg-beige g-py-90">
+            <div class="container" align="center">
+                <div class="g-mb-60  ">
+                    <span class="d-inline-block u-icon-v3 u-icon-size--xl g-color-facebook g-bg-graylight-radialgradient-ellipse rounded-circle g-mb-20">
+                        <i class="icon-finance-201 u-line-icon-pro"></i>
+                    </span>
+                    <h1 style="font-size: 400%;" class="text-uppercase g-mb-15 g-font-weight-900">Reach</h1>
+                    <h1 style="font-size: 300%;" ng-cloak><strong>{{FbRepCtrl.report2.reach.score}}</strong><small> / 10</small></h1>
+                </div>
+                <!--Vector Map-->
+                <div class="embed-responsive embed-responsive-21by9">
+                    <div id="vmap" class="g-pos-abs g-top-0 g-left-0 w-100 h-100"></div>
+                </div>
+                <div class='my-legend g-color-white'>
+                    <div class='legend-title'>Top 45 Countries Talking About Your Page</div>
+                    <div class='legend-scale'>
+                        <ul class='legend-labels'>
+                            <li><span style='background:#F1EEF6;'></span>Very Weak</li>
+                            <li><span style='background:#BDC9E1;'></span>Weak</li>
+                            <li><span style='background:#74A9CF;'></span>Average</li>
+                            <li><span style='background:#2B8CBE;'></span>Strong</li>
+                            <li><span style='background:#045A8D;'></span>Very Strong</li>
+                        </ul>
+                    </div>
+                </div>
+                <table class="table table-condensed table-bordered reachTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-list-ol" aria-hidden="true"></i> Rank</th>
+                            <th><i class="fa fa-flag" aria-hidden="true"></i> Country</th>
+                            <th><i class="fa fa-user" aria-hidden="true"></i> Unique Users per Week</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+                        <tr ng-repeat="x in FbRepCtrl.topTen">
+                            <td><strong>{{$index+1}}</strong></td>
+                            <td>{{x[2]}}</td>
+                            <td>{{x[1] | number}}</td>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- End Section Content -->
+        <!-- Data Collection Section Content -->
+        <section id="dataCollection" class="g-py-90">
+            <div class="container" align="center">
+                <div class="g-mb-60 ">
+                    <span class="d-inline-block u-icon-v3 u-icon-size--xl g-color-white g-bg-blue-lineargradient-v5 rounded-circle g-mb-20">
+                        <i class="icon-finance-158 u-line-icon-pro"></i>
+                    </span>
+                    <h1 style="font-size: 400%;" class="text-uppercase g-mb-15 g-font-weight-900 ">Data Collection</h1>
+                    <h1 style="font-size: 300%;" ng-cloak><strong>{{FbRepCtrl.data_score}}</strong><small> / 15</small></h1>
+                </div>
+                <div class="text-center g-max-width-550">
+                    <h4 class="h6 text-uppercase g-font-weight-700 g-mb-15">Resources are Available</h4>
+                    <p class="g-font-size-default g-mb-30">Collecting more data on your social media performance can help you understand where you can improve.</p>
+                    <button class="btn btn-lg text-uppercase u-btn-blue g-font-weight-700 g-font-size-12 g-rounded-10 g-px-25 g-py-12 mb-0" ng-click="FbRepCtrl.moreBtn()">Learn more</button>
+                </div>
+            </div>
+        </section>
+        <!-- End Section Content -->
+        <section id="suggestions" class="g-pt-90 g-pb-30 g-pb-90--lg text-center" style="background-color: #73CAD4; ">
+            <div class="container" style="width:100%; margin:0 auto;" ng-cloak>
+                <!--Basic Table-->
+                <h1 style="font-size: 200%; color: white;" class="text-uppercase g-mb-15 g-font-weight-900 g-py-20">Report Overview</h1>
+                <div class="table-responsive">
+                    <table class="table u-table--v2">
+                        <thead class="text-uppercase g-letter-spacing-1 g-color-white">
+                            <tr>
+                                <th class="g-font-weight-300 g-color-white"><strong>Category</strong></th>
+                                <th class="g-font-weight-300 g-color-white g-min-width-200"><strong>Score</strong></th>
+                                <th class="g-font-weight-300 g-color-white g-min-width-200"><strong>Recommendations</strong></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="g-color-white">
+                            <tr>
+                                <td class="align-middle text-nowrap">
+                                    <h4 class="h6 g-mb-2">Activity</h4>
+                                    <div class="js-rating g-font-size-12 g-color-primary" data-rating="3.5"></div>
+                                </td>
+                                <td class="align-middle"><strong>{{FbRepCtrl.report.activity.points}}</strong><small> / 25</small></td>
+                                <td class="align-middle">
+                                    <div class="d-flex">
+                                        <i class="icon-location-pin g-font-size-18 g-color-gray-dark-v5 g-pos-rel g-top-5 g-mr-7"></i>
+                                        <span>{{FbRepCtrl.suggestion.activity}}</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a class="btn btn-block g-rounded-50 g-py-5" style="background-color: #F3BF39;color: white" ng-click="FbRepCtrl.moreBtn()">
+                                        Learn More
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-nowrap">
+                                    <h4 class="h6 g-mb-2">Engagement</h4>
+                                    <div class="js-rating g-font-size-12 g-color-primary" data-rating="4.5"></div>
+                                </td>
+                                <td class="align-middle"><strong>{{FbRepCtrl.report.engagement.score}}</strong><small> / 25</small></td>
+                                <td class="align-middle">
+                                    <div class="d-flex">
+                                        <i class="icon-location-pin g-font-size-18 g-color-gray-dark-v5 g-pos-rel g-top-5 g-mr-7"></i>
+                                        <span>{{FbRepCtrl.suggestion.engagement}}</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a class="btn btn-block g-rounded-50 g-py-5" style="background-color: #F3BF39;color: white" ng-click="FbRepCtrl.moreBtn()">
+                                        Learn More
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-nowrap">
+                                    <h4 class="h6 g-mb-2">Growth</h4>
+                                    <div class="js-rating g-font-size-12 g-color-primary" data-rating="2"></div>
+                                </td>
+                                <td class="align-middle"><strong>{{FbRepCtrl.report2.growth.points}}</strong><small> / 25</small></td>
+                                <td class="align-middle">
+                                    <div class="d-flex">
+                                        <i class="icon-location-pin g-font-size-18 g-color-gray-dark-v5 g-pos-rel g-top-5 g-mr-7"></i>
+                                        <span>{{FbRepCtrl.suggestion.growth}}</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a class="btn btn-block g-rounded-50 g-py-5" style="background-color: #F3BF39;color: white" ng-click="FbRepCtrl.moreBtn()">
+                                        Learn More
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-nowrap">
+                                    <h4 class="h6 g-mb-2">Reach</h4>
+                                    <div class="js-rating g-font-size-12 g-color-primary" data-rating="5"></div>
+                                </td>
+                                <td><strong>{{FbRepCtrl.report2.reach.score}}</strong><small> / 10</small></td>
+                                <td class="align-middle">
+                                    <div class="d-flex">
+                                        <i class="icon-location-pin g-font-size-18 g-color-gray-dark-v5 g-pos-rel g-top-5 g-mr-7"></i>
+                                        <span>{{FbRepCtrl.suggestion.reach}}</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a class="btn btn-block g-rounded-50 g-py-5"style="background-color: #F3BF39;color: white"  ng-click="FbRepCtrl.moreBtn()">
+                                        Learn More
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-nowrap">
+                                    <h4 class="h6 g-mb-2">Data</h4>
+                                    <div class="js-rating g-font-size-12 g-color-primary" data-rating="4"></div>
+                                </td>
+                                <td class="align-middle"><strong>{{FbRepCtrl.data_score}}</strong> <small> / 15</small></td>
+                                <td class="align-middle">
+                                    <div class="d-flex">
+                                        <i class="icon-location-pin g-font-size-18 g-color-gray-dark-v5 g-pos-rel g-top-5 g-mr-7"></i>
+                                        <span>{{FbRepCtrl.suggestion.data}}</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a class="btn btn-block  g-rounded-50 g-py-5" style="background-color: #F3BF39; color: white" ng-click="FbRepCtrl.moreBtn()">
+                                        Learn More
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--End Basic Table-->
+
+            </div>
+        </section>
+        <!-- Sign Up Section Content -->
+        <section id="signUp" class="g-pt-90 g-pb-30 g-pb-90--lg text-center" style="background-color: #0B5A85">
+            <div class="container" style="width:100%; margin:0 auto;">
+                <div class="row">
+                    <div class="col-sm-12 g-pt-30--lg">
+                        <div class="" align="center">
+                            <div class="g-mb-20 g-mb-0--lg">
+                                <div class="text-uppercase g-mb-20">
+                                    <h2 class="g-font-size-36 g-color-white mb-0">Want <strong>Weekly Reports</strong> ?</h2>
+                                    <h4 class="g-font-size-26 g-color-white mb-0">Get Access to <strong>More</strong></h4>
+                                </div>
+                                <p class="g-color-white mb-0 g-max-width-300">Sign up for access to your own user dashboard. Have your social media data tracked and consistently updated to stay on top of your performance.</p>
+                                <br />
+                                <button ng-click="FbRepCtrl.regBtn()" class="btn btn-xl u-btn-primary u-btn-hover-v1-4 g-letter-spacing-0_5 text-uppercase g-rounded-50 g-px-30 g-mr-10 g-mb-15">
+                                    <span class="pull-left text-left">
+                                        Register Today
+                                        <span class="d-block g-font-size-11">Access Our Dashboard</span>
+                                    </span>
+                                    <i class="fa fa-sign-in float-right g-font-size-42 g-ml-15"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- JS Global Compulsory -->
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/vendor/tether.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="~/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+    <script src="~/assets/vendor/slick-carousel/slick/slick.js"></script>
+    <script src="~/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+    <script src="~/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+    <script src="~/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+    <script src="~/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+    <script src="~/assets/vendor/appear.js"></script>
+    <script src="~/assets/vendor/circles/circles.min.js"></script>
+    <script src="~/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+    <script src="~/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="~/assets/vendor/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- JS Unify -->
+    <script src="~/assets/js/custom.js"></script>
+    <script src="~/assets/js/hs.core.js"></script>
+    <script src="~/assets/js/helpers/hs.hamburgers.js"></script>
+    <script src="~/assets/js/components/hs.smart-menu.js"></script>
+    <script src="~/assets/js/components/hs.onscroll-animation.js"></script>
+    <script src="~/assets/js/components/hs.popup.js"></script>
+    <script src="~/assets/js/components/hs.carousel.js"></script>
+    <script src="~/assets/js/components/hs.tabs.js"></script>
+    <script src="~/assets/js/components/hs.chart-pie.js"></script>
+    <script src="~/assets/js/components/hs.counter.js"></script>
+    <script src="~/assets/js/components/hs.progress-bar.js"></script>
+    <script src="~/assets/js/components/hs.map.svg.js"></script>
+    <!-- JS Custom -->
+    <script src="~/assets/js/custom.js"></script>
+    <!-- JS Plugins Init. -->
+    <script>
+        (function ($) {
+            'use strict';
+            $(document).ready(function () {
+                // Initialization of HSHamburgers helper
+                $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+                // Initialization of HSSmartMenu component
+                $.HSCore.components.HSSmartMenu.init($('.js-smart-menu'));
+
+                $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+
+                $(document).on('click', 'a', function (event) {
+                    event.preventDefault();
+
+                    $('html, body').animate({
+                        scrollTop: $($.attr(this, 'href')).offset().top
+                    }, 500);
+                });
+            });
+        })(jQuery);
+    </script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/plugins/angular-toastr")
+    @Scripts.Render("~/bundles/mainApp")
+    @Scripts.Render("~/Scripts/Facebook/FbRepCtrl.js")
+    @Scripts.Render("~/Scripts/Facebook/FbService.js")
+</body>
+</html>

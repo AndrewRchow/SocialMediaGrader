@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+@model Memeni.Models.ViewModels.ItemViewModel<int>
+<div ng-controller="ConfigCategoryManageController as categoryManageCtrl">
+    <input type="hidden" value="@Model.Item" id="modelId" />
+
+    <form name="configForm" class="form-horizontal col-md-6">
+        <div class="space-15"></div>
+        <div class="row">
+            <button ng-click="categoryManageCtrl.backBtn()" name=".postConfigSettings" class="btn btn-primary btn-sm">Back to Index</button>
+        </div>
+        <fieldset>
+            <div class="form-group">
+                <label class="control-label" for="displayName">Display Name</label>
+                <input ng-model="categoryManageCtrl.storeConfigCategory.displayName"
+                       id="displayName"
+                       name="displayName"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">valid settings of form </p>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="description">Description</label>
+                <input ng-model="categoryManageCtrl.storeConfigCategory.description"
+                       id="description"
+                       name="description"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">a name is reqired</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="modifiedBy">Modified By</label>
+                <input ng-model="categoryManageCtrl.storeConfigCategory.modifiedBy"
+                       id="modifiedBy"
+                       name="modifiedBy"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">a name is reqired</p>
+            </div>
+            <div class="form-group">
+                <button ng-click="categoryManageCtrl.submitBtn(configForm.$valid)"
+                        ng-disabled="configForm.$invalid"
+                        name=".postConfigSettings"
+                        class="btn btn-primary btn-sm">
+                    Submit
+                </button>
+                @*<p>{{categoryManageCtrl.storeConfigCategory}}</p>*@
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/config")
+}
+
+

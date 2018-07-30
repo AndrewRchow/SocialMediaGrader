@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+@model Memeni.Models.ViewModels.ItemViewModel<int>
+<input type="hidden" value="@Model.Item" id="modelId" />
+<div ng-controller="manageController as manageVm">
+    <!-- Heading -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Terms and Conditions</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/admin/home/index">Admin</a>
+                </li>
+                <li>
+                    <a href="/admin/terms/index">Terms</a>
+                </li>
+                <li class="active">
+                    <strong ng-cloak>{{manageVm.route}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <!-- End Heading -->
+    <!-- Form with Rich Text Editor -->
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="ibox float-e-margins">
+                    <div class="mail-box-header">
+                        <h2>Add New Paragraph</h2>
+                    </div>
+                    <!-- Content -->
+                    <div class="mail-box">
+                        <div class="mail-body">
+                            <form class="form-horizontal" method="get">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Title:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" value="" ng-model="manageVm.item.title">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="mail-text h-200">
+                            <summernote ng-model="manageVm.item.description"></summernote>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="mail-body text-right tooltip-demo">
+                            <a href="" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" 
+                               data-original-title="Submit" ng-click="manageVm.submit()"><i class="fa fa-reply"></i> Submit</a>
+                            <a href="/admin/terms/index" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                               title="" data-original-title="Cancel"><i class="fa fa-times"></i> Cancel</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    <!-- End Form -->
+</div>
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/summernoteStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Tnc/ManageController.js")
+    @Scripts.Render("~/Scripts/Tnc/TncService.js")
+
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/summernote")
+
+    <script src="~/Scripts/Tnc/TncScripts.js"></script>
+}

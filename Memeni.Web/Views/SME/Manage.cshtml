@@ -1,0 +1,76 @@
+﻿@model Memeni.Models.ViewModels.ItemViewModel<int>
+@{
+    ViewBag.Title = "Social Media Integration";
+}
+    <style>
+        .jumbotron {
+            background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+            color: black;
+            padding: 100px 25px;
+        }
+        .spacingForm {
+            padding-left: 50px;
+        }
+    </style>
+    <input id="modelId" type="hidden" value="@Model.Item"/>
+    <!--Banner-->
+    <div class="jumbotron">
+        <h1>Social Media Integration</h1>
+        <blockquote>
+            Engagement is one of the most critical ways that you can measure
+            how well your content - your messaging - is resonating with your audience.
+            Every company should be aiming to generate and increase their engagement on
+            social media: it produces brand affinity, generates website traffic, and amplifies
+            your messaging beyond your audience.
+        </blockquote>
+    </div>
+    <div ng-controller="smeManageController as smeMngCtrl">
+        <div class="container-fluid row">
+            <!--Info Box-->
+            <div class="panel panel-default col-sm-6">
+                <div class="panel-heading"><h4>Number of Social Media Interactions</h4></div>
+                <div class="panel-body">
+                    <small>
+                        It’s not just about delivering content - that content needs to resonate with your audience.
+                        Take a look at audience interactions to see how your community is responding to your
+                        content. And look at whether you are succeeding at engaging your potential customers.
+                        If they are, next you will want to understand why.
+                    </small>
+                </div>
+                <div class="panel-footer"><a class="btn btn-primary" href="/SME/Index">Return to Index</a></div>
+            </div>
+            <!--Form-->
+            <div class="container col-sm-6 spacingForm">
+                <h4>Interactions Data</h4>
+                <form name="addForm">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" ng-model="smeMngCtrl.addForm.modifiedBy" class="form-control" name="modBy" placeholder="User ID" required>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-circle-arrow-up"></i></span>
+                        <input type="number" step="any" ng-model="smeMngCtrl.addForm.maxInteractionsPer1k" class="form-control" name="maxInt" placeholder="Maximum Interactions per 1000 Fans" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-circle-arrow-down"></i></span>
+                        <input type="number" step="any" ng-model="smeMngCtrl.addForm.minInteractionsPer1k" class="form-control" name="minInt" placeholder="Minimum Interactions per 1000 Fans" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+                        <input type="number" step="any" ng-model="smeMngCtrl.addForm.sumInteractionsPer1k" class="form-control" name="sumInt" placeholder="Sum of Interactions per 1000 Fans" required>
+                    </div>
+                    <br />
+                    <button type="button" class="btn btn-default" ng-disabled="addForm.$invalid" ng-click="smeMngCtrl.submit()">Submit</button>
+                </form>
+            </div>        
+        </div>
+    </div>
+@section scripts {     
+    @Scripts.Render("~/bundles/sme") 
+}
+</body>
+
+
+
+

@@ -1,0 +1,511 @@
+﻿@model Memeni.Models.ViewModels.BaseViewModel
+<!DOCTYPE html>
+<html lang="en" class="font-primary" ng-app="mainApp">
+<head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Page MetaData Start -->
+    @foreach (var item in Model.PageTags)
+    {
+        @Html.Raw(item.MetaTemplate.Replace("{{tags.value}}", item.Value))
+    }
+    <!-- Page MetaData End -->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700%7Csubset=cyrillic,latin" rel="stylesheet" type="text/css">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/vendor/bootstrap/bootstrap.min.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/assets/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-line-pro/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/animate.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+    <link rel="stylesheet" href="~/assets/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/assets/vendor/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="~/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/plyr/dist/plyr.css">
+    <link rel="stylesheet" href="~/assets/vendor/hsBgVideo/hs-bg-video.css">
+    <link rel="stylesheet" href="~/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="~/assets/vendor/hamburgers/hamburgers.min.css">
+    <!-- CSS Unify -->
+    <link rel="stylesheet" href="~/assets/css/unify.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    @RenderSection("styles", required: false)
+    <!-- Landing Page CSS -->
+    @*<link rel="stylesheet" href="~/Content/landingpagestyle.css">*@
+</head>
+<body ng-controller="manageController as helpCtrl">
+    <main>
+        <!-- Header -->
+        <header id="js-header" class="u-header u-header--static u-header--toggle"
+                data-header-fix-moment="500"
+                data-header-fix-effect="slide">
+            <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10"
+                 data-header-fix-moment-exclude="g-bg-white g-py-10"
+                 data-header-fix-moment-classes="g-bg-white-opacity-0_9 u-shadow-v18 g-py-3">
+                <nav class="js-mega-menu navbar navbar-toggleable-md">
+                    <div class="container">
+                        <!-- Responsive Toggle Button -->
+                        <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-right-0" type="button"
+                                aria-label="Toggle navigation"
+                                aria-expanded="false"
+                                aria-controls="navBar"
+                                data-toggle="collapse"
+                                data-target="#navBar">
+                            <span class="hamburger hamburger--slider">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </span>
+                        </button>
+                        <!-- End Responsive Toggle Button -->
+                        <!-- Logo -->
+                        <a href="/Home" class="navbar-brand">
+                            <img src="../../assets/img/logo/logo-1.png" alt="Image Description">
+                        </a>
+                        <!-- End Logo -->
+                        <!-- Navigation -->
+                        <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg" id="navBar">
+                            <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
+                                <li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                    <a href="../../index.html" class="nav-link g-py-7 g-px-0">Intro</a>
+                                </li>
+                                <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+                                    <a id="nav-link--home" class="nav-link g-py-7 g-px-0" href="#"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       aria-controls="nav-submenu--home">Home</a>
+                                    <!-- Submenu -->
+                                    <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-20 g-mt-15--lg--scrolling" id="nav-submenu--home"
+                                        aria-labelledby="nav-link--home">
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-1.html">Home 1</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-2.html">Home 2</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-3.html">Home 3</a></li>
+                                    </ul>
+                                    <!-- End Submenu -->
+                                </li>
+                                <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+                                    <a id="nav-link--pages" class="nav-link g-py-7 g-px-0" href="#"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       aria-controls="nav-submenu--pages">Pages</a>
+                                    <!-- Submenu -->
+                                    <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-20 g-mt-15--lg--scrolling" id="nav-submenu--pages"
+                                        aria-labelledby="nav-link--pages">
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--pages--about" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--pages--about">About</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--pages--about"
+                                                aria-labelledby="nav-link--pages--about">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-about-1.html">About 1</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-about-2.html">About 2</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-about-me-1.html">About me 1</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-about-me-2.html">About me 2</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-about-me-3.html">About me 3</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--pages--services" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--pages--services">Services</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--pages--services"
+                                                aria-labelledby="nav-link--pages--services">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-services-1.html">Services 1</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-services-2.html">Services 2</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-services-3.html">Services 3</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-clients-1.html">Clients</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-invoice-1.html">Invoice</a></li>
+                                    </ul>
+                                    <!-- End Submenu -->
+                                </li>
+                                <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+                                    <a id="nav-link--features" class="nav-link g-py-7 g-px-0" href="#"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       aria-controls="nav-submenu--features">Features</a>
+                                    <!-- Submenu -->
+                                    <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-20 g-mt-15--lg--scrolling" id="nav-submenu--features"
+                                        aria-labelledby="nav-link--features">
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/headers/index.html">Headers</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/promo/shortcode-blocks-promo.html">Promo blocks</a></li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--features--pop-ups" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--features--pop-ups">Pop-ups</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--features--pop-ups"
+                                                aria-labelledby="nav-link--features--pop-ups">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-base-lightbox.html">Lightbox</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-base-modals.html">Modals</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-blocks-gallery.html">Gallery</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--features--maps" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--features--maps">Maps</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--features--maps"
+                                                aria-labelledby="nav-link--features--maps">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-base-google-maps.html">Google Maps</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-base-maps-with-pins.html">Maps With Pins</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/shortcode-base-vector-maps.html">Vector Maps</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--features--footers" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--features--footers">Footers</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--features--footers"
+                                                aria-labelledby="nav-link--features--footers">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/footers/shortcode-blocks-footer-classic.html">Classic Footers</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/footers/shortcode-blocks-footer-contact-forms.html">Contact Forms</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/footers/shortcode-blocks-footer-maps.html">Footers Maps</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../unify-main/shortcodes/footers/shortcode-blocks-footer-modern.html">Modern Footers</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                    </ul>
+                                    <!-- End Submenu -->
+                                </li>
+                                <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl"
+                                    data-animation-in="fadeIn"
+                                    data-animation-out="fadeOut"
+                                    data-position="right">
+                                    <a id="mega-menu-shortcodes" class="nav-link g-py-7 g-px-0" href="#" aria-haspopup="true" aria-expanded="false">Shortcodes <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-ml-7"></i></a>
+                                    <!-- Mega Menu -->
+                                    <div class="w-100 hs-mega-menu u-shadow-v11 font-weight-normal g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mt-17 g-mt-7--lg--scrolling" aria-labelledby="mega-menu-shortcodes">
+                                        <ul class="nav justify-content-center u-nav-v5-1 u-nav-primary g-font-weight-600 g-brd-bottom--md g-brd-gray-light-v4"
+                                            data-tabs-mobile-type="slide-up-down"
+                                            data-destroy-res="768"
+                                            data-btn-classes="btn btn-md btn-block u-btn-outline-black">
+                                            <li class="nav-item">
+                                                <a class="nav-link active g-py-10--md g-px-15--md" href="#tab-blocks"
+                                                   role="tab"
+                                                   data-toggle="tab">Blocks</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link g-py-10--md g-px-15--md" href="#tab-bases"
+                                                   role="tab"
+                                                   data-toggle="tab">Bases</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active show" id="tab-blocks"
+                                                 role="tabpanel">
+                                                <div class="row align-items-stretch no-gutters">
+                                                    <div class="col-md-6 col-lg-3">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/headers/index.html" class="nav-link">Headers</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/promo/shortcode-blocks-promo.html" class="nav-link">Promo</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/footers/shortcode-blocks-footer-classic.html" class="nav-link">Footer classic</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3 g-brd-left--lg g-brd-gray-light-v5">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-counters.html" class="nav-link">Counters</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-cta-boxed.html" class="nav-link">CTA (boxed)</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-cta-full-width.html" class="nav-link">CTA (full width)</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3 g-brd-left--lg g-brd-gray-light-v5">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-info-blocks.html" class="nav-link">Info blocks</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-news.html" class="nav-link">News</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-news-image.html" class="nav-link">News image</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3 g-brd-left--lg g-brd-gray-light-v5">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-products-advanced.html" class="nav-link">Products advanced</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-products-list.html" class="nav-link">Products list</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-blocks-products-overlay.html" class="nav-link">Products overlay</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade in" id="tab-bases"
+                                                 role="tabpanel">
+                                                <div class="row align-items-stretch no-gutters">
+                                                    <div class="col-md-4">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-accrodions.html" class="nav-link">Accrodions</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-alerts.html" class="nav-link">Alerts</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-badges.html" class="nav-link">Badges</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4 g-brd-left--lg g-brd-gray-light-v5">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-progress-bars.html" class="nav-link">Progress bars</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-static-process-blocks-1.html" class="nav-link">Static process blocks 1</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/shortcode-base-tables.html" class="nav-link">Tables</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4 g-brd-left--lg g-brd-gray-light-v5">
+                                                        <ul class="list-unstyled g-py-7">
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/icons/shortcode-base-social-icons.html" class="nav-link">Social icons</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/icons/shortcode-base-icon-fontawesome.html" class="nav-link">Icon fontawesome</a></li>
+                                                            <li class="dropdown-divider"></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/tabs/shortcode-base-tabs-1-1.html" class="nav-link">Tabs 1-1</a></li>
+                                                            <li class="dropdown-item"><a href="../../unify-main/shortcodes/tabs/shortcode-base-tabs-1-2.html" class="nav-link">Tabs 1-2</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Mega Menu -->
+                                </li>
+                                <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+                                    <a id="nav-link-home" class="nav-link g-py-7 g-px-0" href="#"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       aria-controls="nav-submenu-home">Demos</a>
+                                    <!-- Submenu -->
+                                    <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-20 g-mt-15--lg--scrolling" id="nav-submenu-demos"
+                                        aria-labelledby="nav-link-demos">
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--demos--one-page" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--demos--one-page">One Pages</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--demos--one-page"
+                                                aria-labelledby="nav-link--demos--one-page">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../one-pages/accounting/index.html">Accounting</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../one-pages/agency/index.html">Agency</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../one-pages/app/index.html">App</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--demos--e-commerce" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--demos--e-commerce">E-Commerce</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--demos--e-commerce"
+                                                aria-labelledby="nav-link--demos--e-commerce">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../e-commerce/index.html">Main Page</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../e-commerce/page-grid-filter-1.html">Grid Filter</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../e-commerce/page-list-filter-1.html">List Filter</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                        <li class="dropdown-item hs-has-sub-menu">
+                                            <a id="nav-link--demos--blog-magazine" class="nav-link" href="#"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"
+                                               aria-controls="nav-submenu--demos--blog-magazine">Blogs &amp; Magazines</a>
+                                            <!-- Submenu (level 2) -->
+                                            <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-my-2" id="nav-submenu--demos--blog-magazine"
+                                                aria-labelledby="nav-link--demos--blog-magazine">
+                                                <li class="dropdown-item"><a class="nav-link" href="../../blog-magazine/classic/bm-classic-home-1.html">Home</a></li>
+                                                <li class="dropdown-item"><a class="nav-link" href="../../blog-magazine/classic/bm-classic-single-1.html">Single</a></li>
+                                            </ul>
+                                            <!-- End Submenu (level 2) -->
+                                        </li>
+                                    </ul>
+                                    <!-- End Submenu -->
+                                </li>
+                                <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl"
+                                    data-animation-in="fadeIn"
+                                    data-animation-out="fadeOut"
+                                    data-position="right">
+                                    <a id="mega-menu-others" class="nav-link g-py-7 g-px-0" href="#" aria-haspopup="true" aria-expanded="false">Others <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-ml-7"></i></a>
+                                    <!-- Mega Menu -->
+                                    <div class="w-100 hs-mega-menu u-shadow-v11 font-weight-normal g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mt-17 g-mt-7--lg--scrolling" aria-labelledby="mega-menu-others">
+                                        <div class="row align-items-stretch no-gutters">
+                                            <div class="col-md-6 col-lg-4">
+                                                <ul class="list-unstyled g-py-7">
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-grid-background-overlay-left-sidebar.html" class="nav-link">Blog grid background overlay left (sidebar)</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-grid-background-overlay-right-sidebar.html" class="nav-link">Blog grid background overlay right (sidebar)</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-grid-background-overlay-2.html" class="nav-link">Blog grid background overlay 2</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 g-brd-left--lg g-brd-gray-light-v5">
+                                                <ul class="list-unstyled g-py-7">
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-masonry-col-2.html" class="nav-link">Blog masonry col 2</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-masonry-col-3.html" class="nav-link">Blog masonry col 3</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-masonry-col-3-fullwidth.html" class="nav-link">Blog masonry col 3 (fullwidth)</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-masonry-col-4.html" class="nav-link">Blog masonry col 4</a></li>
+                                                    <li class="dropdown-item"><a href="../../unify-main/blog/blog-masonry-col-4-fullwidth.html" class="nav-link">Blog masonry col 4 (fullwidth)</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 g-brd-left--lg g-brd-gray-light-v5">
+                                                <ul class="list-unstyled g-py-7">
+                                                    <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-login-3.html">Login 3</a></li>
+                                                    <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-login-4.html">Login 4</a></li>
+                                                    <li class="dropdown-divider"></li>
+                                                    <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-signup-1.html">Signup 1</a></li>
+                                                    <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-signup-2.html">Signup 2</a></li>
+                                                    <li class="dropdown-item"><a class="nav-link" href="../../unify-main/pages/page-signup-3.html">Signup 3</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Mega Menu -->
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Navigation -->
+                        @*<div class="d-inline-block hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+                            <a class="btn u-btn-outline-primary g-font-size-13 text-uppercase g-py-10 g-px-15" href="#" data-toggle="modal" data-target="#loginModal" data-modal-effect="fade-in">Login</a>
+                        </div>*@
+                        <div style="padding:20px">
+                            @{
+                                var url = Request.Url.ToString();
+                            }
+                            <input type="hidden" value="@url" id="url" />
+                            <a ng-click="helpCtrl.testMsg()" data-target="#helpForm" data-toggle="modal" href="#">
+                                <i class="fa fa-question-circle-o fa-3x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- End Header -->
+        <!-- Promo Block -->
+        <div class="container body-content">
+
+            @RenderBody()
+
+        </div>
+        <!-- End News -->
+        <hr class="g-brd-gray-light-v4 my-0">
+        <!-- Footer -->
+        <footer class="container g-pt-100 g-pb-60">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 g-mb-30">
+                    <a class="d-inline-block mb-4" href="#">
+                        <img class="g-width-100 g-height-auto" src="../../assets/img/logo/logo-1.png" alt="Image Description">
+                    </a>
+                    <p class="g-color-gray-dark-v4 g-font-size-13 mb-0">2017 © All Rights Reserved.</p>
+                </div>
+                <div class="col-sm-4 col-lg-2 ml-auto g-mb-30">
+                    <!-- Links -->
+                    <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-13 mb-0">
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">About</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Services</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Contacts</a></li>
+                    </ul>
+                    <!-- End Links -->
+                </div>
+                <div class="col-sm-4 col-lg-2 g-mb-30">
+                    <!-- Links -->
+                    <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-13 mb-0">
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Support &amp; FAQ</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Jobs</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Privacy &amp; Policy</a></li>
+                    </ul>
+                    <!-- End Links -->
+                </div>
+                <div class="col-sm-4 col-lg-2 g-mb-30">
+                    <h3 class="h6 g-color-black g-font-weight-600 text-uppercase mb-4">Follow Us</h3>
+                    <!-- Social Icons -->
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="#">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-teal g-bg-teal-opacity-0_1 g-color-teal--hover rounded-circle" href="#">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="#">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-google-plus"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-purple g-bg-purple-opacity-0_1 g-color-purple--hover rounded-circle" href="#">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End Social Icons -->
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+    </main>
+    <!-- JS Global Compulsory -->
+    @Scripts.Render("~/bundles/unify")
+    <!-- JS Unify -->
+    @Scripts.Render("~/bundles/templatescripts")
+    <!-- JS Customization -->
+    @Scripts.Render("~/assets/js/custom.js")
+    <!-- JS Plugins Init. -->
+    @Scripts.Render("~/bundles/hsmegamenu")
+    <!-- Angular -->
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/Scripts/angular-summernote.js")
+    @Scripts.Render("~/Scripts/angular-drag-and-drop-lists.js")
+    @Scripts.Render("~/Scripts/dirPagination.js")
+    @Scripts.Render("~/plugins/angular-toastr")
+
+    <!-- Main App -->
+    @Scripts.Render("~/bundles/mainapp")
+    <script src="~/Scripts/Auth/LoginCtrl.js"></script>
+    <script src="~/Scripts/Auth/AuthService.js"></script>
+    @Scripts.Render("~/bundles/help")
+
+    @RenderSection("scripts", required: false)
+
+    <!-- Login Modal -->
+    @*<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        @Html.Partial("~/Views/Home/Login.cshtml")
+    </div>*@
+
+    <!-- Help Modal -->
+    <div class="modal inmodal" id="helpForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">help form title</h4>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <h2>help form goes here</h2>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

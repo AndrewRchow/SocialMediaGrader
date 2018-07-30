@@ -1,0 +1,757 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/plugins/toastr/angular-toastr.css" rel="stylesheet" />
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="~/assets/vendor/jvectormap/jquery-jvectormap-2.0.3.css">
+<style>
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+    }
+
+    .boxshadow {
+        box-shadow: 5px 5px 1px #888888;
+        padding: 0px 30px;
+    }
+
+    .my-legend {
+        position: relative;
+        top: -120px;
+        left: 10px;
+    }
+
+        .my-legend .legend-title {
+            text-align: left;
+            margin-bottom: 8px;
+            /*font-weight: bold;*/
+            font-size: 90%;
+            text-shadow: 1px 1px #000;
+        }
+
+        .my-legend .legend-scale ul {
+            margin: 0;
+            padding: 0;
+            float: left;
+            list-style: none;
+        }
+
+            .my-legend .legend-scale ul li {
+                display: block;
+                float: left;
+                width: 50px;
+                margin-bottom: 6px;
+                text-align: center;
+                font-size: 80%;
+                list-style: none;
+                text-shadow: 1px 1px #000;
+            }
+
+        .my-legend ul.legend-labels li span {
+            display: block;
+            float: left;
+            height: 15px;
+            width: 50px;
+        }
+
+    .goToTop {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        z-index: 100;
+        cursor: pointer;
+        opacity: .80;
+        filter: alpha(opacity=80);
+    }
+
+    .profileDiv {
+        margin: auto;
+        width: 75%;
+        padding: 10px;
+    }
+
+    /*.logoBtnInvis {
+        display: none;
+    }
+
+    .logoBtnVis {
+        display: block;
+    }*/
+
+</style>
+<div class="container ng-cloak" ng-controller="userIndexController as uIndexCtrl">
+
+    <!-- Nav tabs -->
+    <ul class="nav text-center nav-justified u-nav-v2-2 g-mb-20" role="tablist" data-target="nav-2-2-default-hor-left-big-icons" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#nav-2-2-default-hor-left-big-icons--1" role="tab">
+                <i class="d-block g-font-size-35 fa fa-facebook-square"></i>
+                Facebook
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#nav-2-2-default-hor-left-big-icons--2" role="tab">
+                <i class="d-block g-font-size-35 fa fa-twitter-square"></i>
+                Twitter
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#nav-2-2-default-hor-left-big-icons--3" role="tab">
+                <i class="d-block g-font-size-35 fa fa-cog"></i>
+                Settings
+            </a>
+        </li>
+    </ul>
+    <!-- End Nav tabs -->
+    <!-- Tab panes -->
+    <div id="nav-2-2-default-hor-left-big-icons" class="tab-content" ng-controller="userFbController as uFbCtrl">
+        <!--Facebook Tab-->
+        <div class="tab-pane fade show active" id="nav-2-2-default-hor-left-big-icons--1" role="tabpanel">
+            <div class="container fluid">
+                <!--Facebook Enter User Form-->
+                <div class="text-center g-py-100" ng-show="uFbCtrl.fbAcct">
+                    <form name="fbAcctform" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+                        <span style="box-shadow: 4px 4px 1px #808080" class="u-icon-v3 g-bg-facebook g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20"><i class="fa fa-facebook"></i></span>
+                        <h1 style="text-shadow: 1px 1px #808080;" class="g-color-blue g-mb-15 g-font-weight-900">Link Facebook Account</h1>
+                        <div class="form-group g-mb-25">
+                            <input type="text" class="form-control form-control-md rounded-0" style="max-width: 400px; margin:auto" id="fbUrl" aria-describedby="fbHelp" placeholder="Enter Facebook Page Name" name="input" ng-model="uFbCtrl.fbAcctName" required>
+                            <small id="fbHelp" class="form-text text-muted">Facebook report will show after entry.</small>
+                        </div>
+                        <button type="submit" class="btn btn-md u-btn-facebook rounded-0" ng-disabled="fbAcctform.$invalid || uFbCtrl.btnLoad" ng-click="uFbCtrl.submitFb(uFbCtrl.fbAcctName)">
+                            <span ng-hide="uFbCtrl.btnLoad">Submit</span>
+                            <span ng-show="uFbCtrl.btnLoad"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+                        </button>
+                    </form>
+                </div>
+                <!--Loading Screen-->
+                <div class="text-center g-py-150" ng-show="uFbCtrl.loading">
+                    <img style="margin:auto;" class="g-py-30" src="~/assets/loader-icons/loader-128x/Preloader_3.gif" />
+                    <h3>Loading</h3>
+                </div>
+                <!--Facebook User DashBoard with Graphs-->
+                <div ng-show="uFbCtrl.fbDash">
+                    <!--FB Profile-->
+                    <div class="text-center g-py-10">
+                        <div class="g-mb-30">
+                            <!-- Figure -->
+                            <figure class="u-shadow-v21 u-shadow-v21--hover g-brd-around g-brd-gray-light-v4 g-bg-white g-rounded-4 text-center g-transition-0_3">
+                                <div class="g-py-40 g-px-20">
+                                    <img ng-src="{{uFbCtrl.fbProfileInfo.picture.data.url}}" style="box-shadow: 4px 4px 1px #808080; position: relative; left: 7px;" class=" g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20" />
+                                    <!-- Figure Info -->
+                                    <h1 class="text-uppercase g-mb-15 g-font-weight-900 g-color-blue" style="text-shadow: 2px 2px #808080; position: relative; left: 7px;">{{uFbCtrl.fbProfileInfo.name}}</h1>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item mx-1">
+                                            <span class="u-icon-v1 u-icon-size--sm g-color-white g-bg-facebook rounded-circle">
+                                                <i class="fa fa-facebook"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <!-- End Figure Info -->
+                                </div>
+                                <!-- Figure Footer -->
+                                <footer class="d-flex justify-content-between g-bg-gray-light-v5 g-py-20 g-px-40">
+                                    <span class="g-color-gray-dark-v5 g-color-facebook--hover g-font-size-13 g-text-underline--none--hover h4">{{uFbCtrl.fbProfileInfo.engagement.count | number}} Likes</span>
+                                    <span class="g-color-gray-dark-v5 g-color-facebook--hover g-font-weight-600--hover g-font-size-13 g-text-underline--none--hover h4">{{uFbCtrl.fbProfileInfo.talking_about_count | number}} Talking</span>
+                                </footer>
+                                <!-- End Figure Footer -->
+                            </figure>
+                            <!-- End Figure -->
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-50">
+                        <i class="fa fa-thumbs-o-up u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!-- Line Graph for Engagement -->
+                    <div id="line-chart" ng-controller="LineCtrl" class="row g-pa-40 g-mb-30">
+                        <div class="col-lg-8 col-md-12">
+                            <h3 class="g-mb-20">
+                                <i class="fa fa-area-chart g-font-size-default g-mr-5"></i> Social Media Engagement <span class="h6">(30 days)</span>
+                            </h3>
+                            <div class="">
+                                <canvas id="line" class="chart chart-line" chart-data="data"
+                                        chart-labels="labels" chart-series="series" chart-options="options"
+                                        chart-dataset-override="datasetOverride" chart-click="onClick"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 g-py-50">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Average <small>per Day</small></th>
+                                        <th>Average <small>per Post</small></th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in uFbCtrl.enTable">
+                                        <td><strong>{{x[0]}}</strong></td>
+                                        <td>{{x[1] | number:0}}</td>
+                                        <td>{{x[2] | number:0}}</td>
+                                        <td>{{x[3] | number}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-20">
+                        <i class="fa fa-user-o u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!-- Bar graph for Activity-->
+                    <div id="line-chart" ng-controller="BarCtrl" class="row g-pa-40 g-mb-30">
+                        <div class="col-lg-4 col-md-12">
+                            <h3 class="g-mb-20">
+                                <i class="fa fa-bar-chart g-font-size-default g-mr-5"></i> Social Media Posts <br /><span class="h6">(30 days)</span>
+                            </h3>
+                            <div class="g-pa-20">
+                                <h5>Total Posts for Past 30d</h5>
+                                <p class="text-xl-center h1"><strong>{{uFbCtrl.totalPst}}</strong> <span class="h5">Posts</span></p>
+                            </div>
+                            <div class="g-pa-20">
+                                <h5>Average Posts Per Day</h5>
+                                <p class="text-xl-center h1 "><strong>{{uFbCtrl.avgDpst | number}}</strong> <span class="h5">Posts</span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="g-py-50">
+                                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-20">
+                        <i class="fa fa-map-marker u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!--Tables for Top 10 Countries for Likes/Talk-->
+                    <div class="row g-pa-40 g-mb-30">
+                        <div class="col-md-6 col-sm-12">
+                            <h4 class="g-mb-20">
+                                <i class="fa fa-globe g-font-size-default g-mr-5"></i> <strong>Top 10 Countries</strong> <small class="h6">in Likes</small>
+                            </h4>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fa fa-list-ol" aria-hidden="true"></i>Rank</th>
+                                        <th><i class="fa fa-flag" aria-hidden="true"></i> Country</th>
+                                        <th><i class="fa fa-user" aria-hidden="true"></i> Total Likes</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-cloak>
+                                    <tr ng-repeat="x in uFbCtrl.topTenG">
+                                        <td><strong>{{$index+1}}</strong></td>
+                                        <td>{{x[2]}}</td>
+                                        <td>{{x[1] | number}}</td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <h4 class="g-mb-20">
+                                <i class="fa fa-globe g-font-size-default g-mr-5"></i> <strong>Top 10 Countries</strong> <small class="h6">Talking</small>
+                            </h4>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fa fa-list-ol" aria-hidden="true"></i>Rank</th>
+                                        <th><i class="fa fa-flag" aria-hidden="true"></i> Country</th>
+                                        <th><i class="fa fa-user" aria-hidden="true"></i> Unique Users for 30d</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-cloak>
+                                    <tr ng-repeat="x in uFbCtrl.topTenR">
+                                        <td><strong>{{$index+1}}</strong></td>
+                                        <td>{{x[2]}}</td>
+                                        <td>{{x[1] | number}}</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-50">
+                        <i class="fa fa-globe u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!--Vector Map Graph for Growth and Reach-->
+                    <div class="embed-responsive embed-responsive-21by9 2 g-pa-40 g-mb-30">
+                        <div id="vmap" class="g-pos-abs g-top-0 g-left-0 w-100 h-100"></div>
+                    </div>
+                    <div class='my-legend g-color-white'>
+                        <div class='legend-title'>Top 45 Countries Talking About Your Page</div>
+                        <div class='legend-scale'>
+                            <ul class='legend-labels'>
+                                <li><span style='background:#F1EEF6;'></span>Very Weak</li>
+                                <li><span style='background:#BDC9E1;'></span>Weak</li>
+                                <li><span style='background:#74A9CF;'></span>Average</li>
+                                <li><span style='background:#2B8CBE;'></span>Strong</li>
+                                <li><span style='background:#045A8D;'></span>Very Strong</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-50">
+                        <i class="fa fa-facebook u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!--Reset Button for Facebook Linkage to Account-->
+                    <div class="g-py-20" style="text-align:center">
+                        <button ng-click="uFbCtrl.resetLink()" class="btn btn-xl u-btn-outline-facebook u-btn-content g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-mr-10 g-mb-15">
+                            <i class="fa fa-facebook-square pull-left g-font-size-42 g-mr-10"></i>
+                            <span class="float-right text-left">
+                                Reset Link
+                                <span class="d-block g-font-size-11">Link Different Facebook Account</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Twitter Tab -->
+        <!-- Test Twitter -->
+        <div class="tab-pane fade" id="nav-2-2-default-hor-left-big-icons--2" role="tabpanel">
+            <div class="container fluid" ng-controller="userTwitterController as uTwCtrl">
+                <!--Twitter Enter User Form-->
+                <div class="text-center g-py-100" ng-show="uTwCtrl.twAcct">
+                    <form name="twAcctform" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+                        <span style="box-shadow: 4px 4px 1px #808080" class="u-icon-v3 g-bg-twitter g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20"><i class="fa fa-twitter"></i></span>
+                        <h1 style="text-shadow: 1px 1px #808080;" class="g-color-blue g-mb-15 g-font-weight-900">Link Twitter Account</h1>
+                        <div class="form-group g-mb-25">
+                            <input type="text" class="form-control form-control-md rounded-0" style="max-width: 400px; margin:auto" id="fbUrl" aria-describedby="fbHelp" placeholder="Enter Twitter Page Name" name="input" ng-model="uTwCtrl.twAcctName" required>
+                            <small id="twHelp" class="form-text text-muted">Twitter report will show after entry.</small>
+                        </div>
+                        <button type="submit" class="btn btn-md u-btn-twitter rounded-0" ng-disabled="twAcctform.$invalid || uTwCtrl.btnLoad" ng-click="uTwCtrl.submitTw(uTwCtrl.twAcctName)">
+                            <span ng-hide="uTwCtrl.btnLoad">Submit</span>
+                            <span ng-show="uTwCtrl.btnLoad"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+                        </button>
+                    </form>
+                </div>
+                <!--Loading Screen-->
+                <div class="text-center g-py-150" ng-show="uTwCtrl.loading">
+                    <img style="margin:auto;" class="g-py-30" src="~/assets/loader-icons/loader-128x/Preloader_3.gif" />
+                    <h3>Loading</h3>
+                </div>
+                <!--Twitter User DashBoard with Graphs-->
+                <div ng-show="uTwCtrl.twDash">
+                    <!--TW Profile-->
+                    <div class="text-center g-py-10">
+                        <div class="g-mb-30">
+                            <!-- Figure -->
+                            <figure class="u-shadow-v21 u-shadow-v21--hover g-brd-around g-brd-gray-light-v4 g-bg-white g-rounded-4 text-center g-transition-0_3">
+                                <div class="g-py-40 g-px-20">
+                                    <img ng-src="{{uTwCtrl.twProfileInfo.profile_image_url_https}}" style="box-shadow: 4px 4px 1px #808080; position: relative; left: 7px;" class=" g-rounded-3 g-color-white g-color-white--hover g-mr-15 g-mb-20" />
+                                    <!-- Figure Info -->
+                                    <h1 class="text-uppercase g-mb-15 g-font-weight-900 g-color-blue" style="text-shadow: 2px 2px #808080; position: relative; left: 7px;">{{uTwCtrl.twProfileInfo.name}}</h1>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item mx-1">
+                                            <span class="u-icon-v1 u-icon-size--sm g-color-white g-bg-twitter rounded-circle">
+                                                <i class="fa fa-twitter"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <!-- End Figure Info -->
+                                </div>
+                                <!-- Figure Footer -->
+                                <footer class="d-flex justify-content-between g-bg-gray-light-v5 g-py-20 g-px-40">
+                                    <span class="g-color-gray-dark-v5 g-color-facebook--hover g-font-size-13 g-text-underline--none--hover h4">{{uTwCtrl.twProfileInfo.statuses_count | number}} Tweets</span>
+                                    <span class="g-color-gray-dark-v5 g-color-facebook--hover g-font-weight-600--hover g-font-size-13 g-text-underline--none--hover h4">{{uTwCtrl.twProfileInfo.followers_count | number}} Followers</span>
+                                </footer>
+                                <!-- End Figure Footer -->
+                            </figure>
+                            <!-- End Figure -->
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-50">
+                        <i class="fa fa-thumbs-o-up u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!-- Line Graph for Engagement -->
+                    <div id="line-chart" ng-controller="twLineCtrl" class="row g-pa-40 g-mb-30">
+                        <div class="col-lg-8 col-md-12">
+                            <h3 class="g-mb-20">
+                                <i class="fa fa-area-chart g-font-size-default g-mr-5"></i> Social Media Engagement <span class="h6">(Recent {{uTwCtrl.smeDays | number}} days)</span>
+                            </h3>
+                            <div class="">
+                                <canvas id="line" class="chart chart-line" chart-data="data"
+                                        chart-labels="labels" chart-series="series" chart-options="options"
+                                        chart-dataset-override="datasetOverride" chart-click="onClick"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 g-py-50">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Average <small>per Day</small></th>
+                                        <th>Average <small>per Month</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Likes</strong></td>
+                                        <td>{{uTwCtrl.report.dailyLikes | number:0}}</td>
+                                        <td>{{uTwCtrl.report.LikesCount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Retweets</strong></td>
+                                        <td>{{uTwCtrl.report.dailyRetweets | number:0}}</td>
+                                        <td>{{uTwCtrl.report.RetweetCount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Replies</strong></td>
+                                        <td>{{uTwCtrl.report.dailyReplies | number:0}}</td>
+                                        <td>{{uTwCtrl.report.RepliesCount}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-20">
+                        <i class="fa fa-user-o u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!-- Bar graph for Activity-->
+                    <div id="line-chart" ng-controller="twBarCtrl" class="row g-pa-40 g-mb-30">
+                        <div class="col-lg-4 col-md-12">
+                            <h3 class="g-mb-20">
+                                <i class="fa fa-bar-chart g-font-size-default g-mr-5"></i> Social Media Tweets <br /><span class="h6">(Recent {{uTwCtrl.smeDays | number}} days)</span>
+                            </h3>
+                            <div class="g-pa-20">
+                                <h5>Average Tweets Per Month</h5>
+                                <p class="text-xl-center h1"><strong>{{uTwCtrl.report.TweetCount}}</strong> <span class="h5">Tweets</span></p>
+                            </div>
+                            <div class="g-pa-20">
+                                <h5>Average Tweets Per Day</h5>
+                                <p class="text-xl-center h1 "><strong>{{uTwCtrl.report.dailyTweets | number:2}}</strong> <span class="h5">Tweets</span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="g-py-50">
+                                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-20">
+                        <i class="icon-finance-201 u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!--Tables for Top 10 Countries for Likes/Talk-->
+                    <div id="line-chart" ng-controller="twReachCtrl" class="row g-pa-40 g-mb-30">
+                        <div class="col-lg-8 col-md-12">
+                            <h3 class="g-mb-20">
+                                <i class="fa fa-bar-chart g-font-size-default g-mr-5"></i> Social Media Reach / Growth
+                            </h3>
+                            <div class="">
+                                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="g-pa-20">
+                                <h5>Unique Mentions Per Month</h5>
+                                <p class="text-xl-center h1"><strong>{{uTwCtrl.report.MentionCount}}</strong> <span class="h5">Mentions</span></p>
+                            </div>
+                            <div class="g-pa-20">
+                                <h5>Tweets Retweeted Per Month</h5>
+                                <p class="text-xl-center h1 "><strong>{{uTwCtrl.report.RetweetedCount}}</strong> <span class="h5">Tweets</span></p>
+                            </div>
+                            <div class="g-pa-20">
+                                <h5>Change in Followers <span class="h6">(Past 30 Days)</span></h5>
+                                <p class="text-xl-center h1 "><strong>{{uTwCtrl.report.FollowersChange}}</strong> <span class="h5">%</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-50">
+                        <i class="fa fa-twitter u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+                    </div>
+                    <!--Reset Button for Twitter Linkage to Account-->
+                    <div class="g-py-20" style="text-align:center">
+                        <button ng-click="uTwCtrl.resetLink()" class="btn btn-xl u-btn-outline-twitter u-btn-content g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-mr-10 g-mb-15">
+                            <i class="fa fa-twitter-square pull-left g-font-size-42 g-mr-10"></i>
+                            <span class="float-right text-left">
+                                Reset Link
+                                <span class="d-block g-font-size-11">Link Different Twitter Account</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Settings Tab -->
+        <div class="tab-pane fade" id="nav-2-2-default-hor-left-big-icons--3" role="tabpanel">
+            <!-- Profle Content -->
+            <div class="col-lg-8 profileDiv">
+                <!-- User Block -->
+                <div class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-40" style="box-shadow: 5px 5px 1px #888888;">
+                    <div class="row">
+                        <div class="col-lg-4 g-mb-40 g-mb-0--lg">
+                            <!-- User Image -->
+                            <div class="g-mb-20">
+                                <img class="img-fluid w-100" ng-src="/Uploads/{{uIndexCtrl.item.systemFileName}}" onerror="this.src='https://cdn2.iconfinder.com/data/icons/pittogrammi/142/32-128.png'" alt="Image Description">
+                                <a class="pull-right" @*id="logoBtn"*@ title="Add/Edit Logo" ng-click="uIndexCtrl.uploadIcon(uIndexCtrl.item.id)"><i class="fa fa-file-image-o"></i></a>
+                            </div>
+                            <!-- User Image -->
+                            <!-- User Contact Buttons -->
+                            <h5 style="text-align: center">{{uIndexCtrl.item.companyName}}</h5>
+
+                            <!-- End User Contact Buttons -->
+                        </div>
+                        <div class="col-lg-8">
+                            <!-- User Details -->
+                            <div class="d-flex align-items-center justify-content-sm-between g-mb-5">
+                                <a href="//{{uIndexCtrl.item.companyUrl}}"><h5>{{uIndexCtrl.item.companyUrl}}</h5></a>
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item g-mx-2">
+                                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="#">
+                                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mx-2">
+                                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="#">
+                                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mx-2">
+                                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="#">
+                                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-google-plus"></i>
+                                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mx-2">
+                                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="#">
+                                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
+                                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End User Details -->
+                            <!-- User Position -->
+                            <span class="h3 g-font-weight-300 g-mb-10">
+                                <i class="g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i><strong>{{uIndexCtrl.item.firstName}} {{uIndexCtrl.item.middleName}} {{uIndexCtrl.item.lastName}}</strong>
+                            </span>
+                            <!-- End User Position -->
+                            <!-- User Info -->
+                            <h4 class="h5 g-font-weight-300 g-mb-10">
+                                <i class="g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i><strong>{{uIndexCtrl.item.email}}</strong>
+                            </h4>
+                            <!-- End User Info -->
+                            <hr class="g-brd-gray-light-v4 g-my-20">
+                            <p class="g-line-height-1_6">
+                                <abbr title="Phone Number"><strong>Ph: </strong></abbr><a href="tel:+{{uIndexCtrl.item.countryCode}}{{uIndexCtrl.item.phoneNumber}}">{{uIndexCtrl.item.countryCode}} {{uIndexCtrl.item.phoneNumber}}</a>
+                                <abbr title="Extension"><strong>Ext: </strong></abbr><span>{{uIndexCtrl.item.extension}}</span>
+                            </p>
+                            <hr class="g-brd-gray-light-v4 g-my-20">
+                            <!-- User Skills -->
+                            Registered Date: {{uIndexCtrl.item.dateCreated | date: 'longDate' }}
+                            <a class="pull-right" title="Edit Profile" ng-click="uIndexCtrl.edit(uIndexCtrl.item.userId)" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                            <!-- End User Skills -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End User Block -->
+                <!-- PROFILE modal window -->
+                <div class="modal inmodal" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceIn">
+
+                            <div class="modal-body">
+                                <!-- Heading -->
+                                <div class="text-center g-mb-60">
+                                    <div class="d-inline-block g-width-35 g-height-1 g-bg-primary mb-2"></div>
+                                    <h2 class="g-color-black g-font-weight-600 mb-2">Profile</h2>
+                                </div>
+                                <!-- End Heading -->
+                                <div id="accordion" class="u-accordion u-accordion-color-primary" role="tablist" aria-multiselectable="true">
+
+                                    <!-- Card -- NAME FORM-->
+                                    <div class="card g-brd-none rounded g-mb-20">
+                                        <div id="accordion-heading-01" class="g-pa-0" role="tab">
+                                            <h5 class="mb-0">
+                                                <a class="collapsed d-flex justify-content-between u-shadow-v19 g-color-main g-text-underline--none--hover rounded g-px-20 g-py-5" href="#accordion-body-01" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="accordion-body-01">
+                                                    User Information
+                                                    <span class="u-accordion__control-icon g-color-primary">
+                                                        <i class="fa fa-angle-down"></i>
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="accordion-body-01" class="collapse" role="tabpanel" aria-labelledby="accordion-heading-01">
+                                            <div class="u-accordion__body g-color-gray-dark-v4 g-pa-30">
+                                                <!-- Form Groups -->
+                                                <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+                                                    <div class="form-group g-mb-25">
+                                                        <label class="col-md-4 control-label">First Name</label>
+                                                        <input type="text" class="form-control rounded-0" name="firstName" ng-model="uIndexCtrl.item.firstName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">Middle Name</label>
+                                                        <input type="text" class="form-control rounded-0" name="middleName" placeholder="Optional" ng-model="uIndexCtrl.item.middleName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">Last Name</label>
+                                                        <input type="text" class="form-control rounded-0" name="lastName" ng-model="uIndexCtrl.item.lastName">
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-success btn-sm pull-right" name="saveProfilePerson" ng-click="uIndexCtrl.saveProfilePerson()">
+                                                        Save
+                                                    </button>
+                                                </form>
+                                                <!-- End Form Groups -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Card -->
+                                    <!-- Card -- COMPANY FORM -->
+                                    <div class="card g-brd-none rounded g-mb-20">
+                                        <div id="accordion-heading-02" class="g-pa-0" role="tab">
+                                            <h5 class="mb-0">
+                                                <a class="collapsed d-flex justify-content-between u-shadow-v19 g-color-main g-text-underline--none--hover rounded g-px-20 g-py-5" href="#accordion-body-02" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="accordion-body-02">
+                                                    Company Information
+                                                    <span class="u-accordion__control-icon g-color-primary">
+                                                        <i class="fa fa-angle-down"></i>
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="accordion-body-02" class="collapse" role="tabpanel" aria-labelledby="accordion-heading-02">
+                                            <div class="u-accordion__body g-color-gray-dark-v4 g-pa-30">
+                                                <!-- Form Groups -->
+                                                <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+                                                    <div class="form-group g-mb-25">
+                                                        <label class="col-md-4 control-label">Company</label>
+                                                        <input type="text" class="form-control rounded-0" name="companyName" ng-model="uIndexCtrl.item.companyName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">Company URL</label>
+                                                        <input type="text" class="form-control rounded-0" name="companyUrl" ng-model="uIndexCtrl.item.companyUrl">
+                                                    </div>
+                                                    <br />
+                                                    <button type="button" class="btn btn-outline-success btn-sm pull-right" name="saveProfileCompany" ng-click="uIndexCtrl.saveProfileCompany()">
+                                                        Save
+                                                    </button>
+                                                </form>
+                                                <!-- End Form Groups -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Card -->
+                                    <!-- Card -- PHONE NUMBER FORM -->
+                                    <div class="card g-brd-none rounded g-mb-20">
+                                        <div id="accordion-heading-03" class="g-pa-0" role="tab">
+                                            <h5 class="mb-0">
+                                                <a class="collapsed d-flex justify-content-between u-shadow-v19 g-color-main g-text-underline--none--hover rounded g-px-20 g-py-5" href="#accordion-body-03" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="accordion-body-03">
+                                                    Phone Number
+                                                    <span class="u-accordion__control-icon g-color-primary">
+                                                        <i class="fa fa-angle-down"></i>
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="accordion-body-03" class="collapse" role="tabpanel" aria-labelledby="accordion-heading-03">
+                                            <div class="u-accordion__body g-color-gray-dark-v4 g-pa-30">
+                                                <!-- Form Groups -->
+                                                <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+                                                    <div class="form-group g-mb-25">
+                                                        <label class="col-md-4 control-label">Country Code</label>
+                                                        <input type="text" class="form-control rounded-0" name="countryCode" ng-model="uIndexCtrl.item.countryCode" placeholder="Optional">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">Phone Number</label>
+                                                        <input type="text" class="form-control rounded-0" name="phoneNumber" ng-model="uIndexCtrl.item.phoneNumber">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">Extension</label>
+                                                        <input type="text" class="form-control rounded-0" name="extension" ng-model="uIndexCtrl.item.extension" placeholder="Optional">
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-success btn-sm pull-right" name="saveProfilePhone" ng-click="uIndexCtrl.saveProfilePhone()">
+                                                        Save
+                                                    </button>
+                                                </form>
+                                                <!-- End Form Groups -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Card -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End PROFILE modal window -->
+            </div>
+            <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" style="max-width:300px; margin:auto">
+                <h3 class="h6 g-font-weight-700 g-mb-20"><strong>Weekly Email Reports</strong></h3>
+                <!-- Facebook Toggles Checkbox -->
+                <div class="form-group">
+                    <label class="d-flex align-items-center justify-content-between">
+                        <span>Facebook</span>
+                        <div class="u-check">
+                            <input ng-model="uFbCtrl.fSwitch" ng-change="uFbCtrl.switch('f')" class="hidden-xs-up g-pos-abs g-top-0 g-right-0" name="radGroup3_1" type="checkbox"> <!-- Checked="uIndexCtrl.checked" if its active -->
+                            <div class="u-check-icon-radio-v8">
+                                <i class="fa" data-check-icon=""></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <!-- Twitter Toggles Checkbox -->
+                <div class="form-group">
+                    <label class="d-flex align-items-center justify-content-between">
+                        <span>Twitter</span>
+                        <div class="u-check">
+                            <input ng-model="uFbCtrl.tSwitch" ng-change="uFbCtrl.switch('t')" class="hidden-xs-up g-pos-abs g-top-0 g-right-0" name="radGroup3_1" type="checkbox">
+                            <div class="u-check-icon-radio-v8">
+                                <i class="fa" data-check-icon=""></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Tab panes -->
+    <div>
+        <a class="goToTop">
+            <i class="fa fa-arrow-circle-o-up fa-4x g-color-primary"></i>
+        </a>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="~/assets/vendor/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <!-- JS Unify -->
+    <script src="~/assets/js/hs.core.js"></script>
+    <script src="~/assets/js/components/hs.tabs.js"></script>
+    <script src="~/assets/js/components/hs.map.svg.js"></script>
+    <!-- JS Plugins Init. -->
+    <script>
+        (function ($) {
+            'use strict';
+            $(document).on('ready', function () {
+                // Tabs
+                $.HSCore.components.HSTabs.init('[role="tablist"]');
+            });
+
+            $(window).on('resize', function () {
+                setTimeout(function () {
+                    $.HSCore.components.HSTabs.init('[role="tablist"]');
+                }, 200);
+            });
+
+            $(window).scroll(function () {      /*for scrollToTop button*/
+                if ($(this).scrollTop() > 100) {
+                    $('.goToTop').fadeIn();
+                } else {
+                    $('.goToTop').fadeOut();
+                }
+            });
+            $('.goToTop').click(function () {
+                $("html, body").animate({ scrollTop: 0 }, 300);
+                return false;
+            });
+        })(jQuery);
+    </script>
+    <script src="~/Scripts/UserIndex/UserIndexCtrl.js"></script>
+    <script src="~/Scripts/GenericService.js"></script>
+    <script src="~/Scripts/UserIndex/uFbCtrl.js"></script>
+    <script src="~/Scripts/UserIndex/uTwitterCtrl.js"></script>
+}

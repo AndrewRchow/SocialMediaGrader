@@ -1,0 +1,36 @@
+﻿<style>
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+    }
+</style>
+<div class="ng-cloak" ng-controller="publicViewController as viewVm">
+    <section class="container g-pt-100 g-pb-60">
+        <div class="js-scrollbar card-block  u-info-v1-1 g-bg-white-gradient-v1--after g-height-680 g-pa-0 mCustomScrollbar _mCS_3 mCS-autoHide" style="overflow: visible;">
+            <div id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
+                <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            <div class="g-mb-60" ng-repeat="item in viewVm.items | orderBy:['displayOrder']">
+                                <h4 class="g-color-black g-font-weight-600 text-center g-mb-30">{{item.title}}</h4>
+                                <p ng-bind-html="item.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
+                    <div class="mCSB_draggerContainer">
+                        <div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: auto; max-height: none; top: 0px;">
+                            <div class="mCSB_dragger_bar" style="line-height: 50px;">
+                            </div>
+                        </div>
+                        <div class="mCSB_draggerRail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/tnc")
+}

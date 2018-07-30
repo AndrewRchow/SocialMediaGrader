@@ -1,0 +1,22 @@
+//
+// Dividers
+//
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Divider Styles
+------------------------------------*/
+@import "divider-style-solid";
+@import "divider-style-dotted";
+@import "divider-style-dashed";
+@import "divider-style-db-solid";
+@import "divider-style-db-dashed";
+@import "divider-style-db-dotted";
+@import "divider-style-linear-gradient";
+
+/* Divider Icons Type
+------------------------------------*/
+@import "divider-type-icon";

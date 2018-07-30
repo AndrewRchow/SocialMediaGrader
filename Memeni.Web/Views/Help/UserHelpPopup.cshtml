@@ -1,0 +1,27 @@
+﻿
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fa fa-question-circle-o fa-2x" aria-hidden="true" style="color:yellowgreen"></i>
+            <h5 class="modal-title" id="exampleModalLabel">Help Form</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ul class="list-unstyled">
+                <li ng-repeat="item in layoutHelpCtrl.currentPageHelpItems" class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-primary-left g-rounded-3 g-pa-20 g-mb-7" style="text-align:center">
+                    <div>
+                        <h5>{{item.title}}</h5>
+                        <p>{{item.helpMsg}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" hidden>Close</button>
+        </div>
+    </div>
+</div>
+

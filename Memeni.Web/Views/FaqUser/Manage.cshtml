@@ -1,0 +1,50 @@
+﻿
+<style>
+    .header {
+        margin: 50px;
+        text-align: center;
+    }
+
+    .questions {
+        text-align: center;
+        margin: 25px;
+    }
+</style>
+<div ng-controller="IndexFaqController as FaqIndexCtrl">
+    <h2 class="header">Frequently Asked Questions!</h2>
+
+
+    <div class="questions" ng-model="display" ng-repeat="x in FaqIndexCtrl.allFaqs">
+        <h4 ng-click="showDetails = ! showDetails"> {{x.title}} </h4>
+        <p ng-show="showDetails" class="hidden"> {{x.description}} </p>
+
+
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/GenericService.js"></script>
+    @Scripts.Render("~/bundles/faq")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

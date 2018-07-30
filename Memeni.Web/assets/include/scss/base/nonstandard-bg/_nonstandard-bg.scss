@@ -1,0 +1,26 @@
+/*------------------------------------
+  Tabs
+------------------------------------*/
+
+[class*="u-ns-bg-v"] {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    z-index: 3;
+  }
+}
+
+//
+// Imports
+//
+
+@import "nonstandard-bg-v1";
+@import "nonstandard-bg-v2";
+@import "nonstandard-bg-v3";
+@import "nonstandard-bg-v4";
+@import "nonstandard-bg-v5";
+@import "nonstandard-bg-v6";
+@import "nonstandard-bg-v7";

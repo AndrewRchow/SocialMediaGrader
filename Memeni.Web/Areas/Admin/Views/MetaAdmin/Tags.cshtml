@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Tags";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+@model Memeni.Models.ViewModels.ItemViewModel<int>
+<input type="hidden" value="@Model.Item" id="modelId" />
+<!-- Page Controller -->
+<div ng-controller="metaTagsController as tagsVm">
+    <!-- Heading -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-database"></i> Meta Data</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/admin/home/index">Admin</a>
+                </li>
+                <li>
+                    <a href="/admin/meta/index">Meta</a>
+                </li>
+                <li class="active">
+                    <strong>Tags</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <!-- End Heading -->
+    <!-- Wrapper Content -->
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" ng-cloak>
+                        {{tagsVm.items[0].pageUrl}}
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="50">
+                                        <thead>
+                                            <tr>
+                                                <th data-toggle="true">Name</th>
+                                                <th>Id</th>
+                                                <th>Value</th>
+                                                <th data-hide="all">Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                    <div class="form-group col-sm-4">
+                                        <a class="btn btn-sm btn-primary" href="/admin/meta/index">Return to Index</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Wrapper Content -->
+    <!-- Modal Form -->
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 b-r">
+                            <h3 class="m-t-none m-b" id="metaName" ng-model="tagsVm.item.metaName"></h3>
+                            <p id="metaDescription" ng-model="tagsVm.item.metaDescription"></p>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>Value</label>
+                                    <input id="value" type="text" placeholder="Enter Name" class="form-control" ng-model="tagsVm.item.value">
+                                    <span class="help-block">Please enter a new value</span>
+                                </div>
+                                <div>
+                                    <button data-toggle="modal" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" href="#modal-form" id="submit"><strong>Submit</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Form -->
+</div>
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+    <script src="~/Scripts/Meta/MetaTagsController.js"></script>
+    <script src="~/Scripts/GenericService.js"></script>
+    <script src="~/Scripts/Meta/MetaFooTable.js"></script>
+}

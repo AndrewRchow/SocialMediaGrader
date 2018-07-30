@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html lang="en" class="font-primary" ng-app="mainApp">
+<head>
+    <!-- Title -->
+    <title>@ViewBag.Title</title>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700%7Csubset=cyrillic,latin" rel="stylesheet" type="text/css">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/vendor/bootstrap/bootstrap.min.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/assets/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-line-pro/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/animate.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+    <link rel="stylesheet" href="~/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+    <link rel="stylesheet" href="~/assets/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="~/assets/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/assets/vendor/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="~/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/plyr/dist/plyr.css">
+    <link rel="stylesheet" href="~/assets/vendor/hsBgVideo/hs-bg-video.css">
+    <link rel="stylesheet" href="~/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="~/assets/vendor/hamburgers/hamburgers.min.css">
+    <!-- CSS Unify -->
+    <link rel="stylesheet" href="~/assets/css/unify.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    @RenderSection("styles", required: false)
+    <!-- Landing Page CSS -->
+    @*
+        <link rel="stylesheet" href="~/Content/landingpagestyle.css">*@
+    <link rel="stylesheet" href="~/Content/userIndex.css" />
+</head>
+<body ng-controller="layoutHelpController as layoutHelpCtrl">
+    <main>
+        <!-- Header -->
+        <header id="js-header" class="u-header u-header--static u-header--toggle"
+                data-header-fix-moment="500"
+                data-header-fix-effect="slide">
+            <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10"
+                 data-header-fix-moment-exclude="g-bg-white g-py-10"
+                 data-header-fix-moment-classes="g-bg-white-opacity-0_9 u-shadow-v18 g-py-3">
+                <nav class="js-mega-menu navbar navbar-toggleable-md">
+                    <div class="container">
+                        <!-- Responsive Toggle Button -->
+                        <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-right-0" type="button"
+                                aria-label="Toggle navigation"
+                                aria-expanded="false"
+                                aria-controls="navBar"
+                                data-toggle="collapse"
+                                data-target="#navBar">
+                            <span class="hamburger hamburger--slider">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </span>
+                        </button>
+                        <!-- End Responsive Toggle Button -->
+                        <!-- Logo -->
+                        <a href="/Home" class="navbar-brand">
+                            <img src="~/assets/img/logo/memeni-logo.png" alt="Image Description" />
+                        </a>
+                        <!-- End Logo -->
+                        <!-- Navigation -->
+                        <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg" id="navBar">
+                            <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
+                                <li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                    <a href="/Home/Index" class="nav-link g-py-7 g-px-0">Home</a>
+                                </li>
+                                @*<li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                        <a href="/Home/About" class="nav-link g-py-7 g-px-0">About Us</a>
+                                    </li>*@
+                                <li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                    <a href="/Home/Contact" class="nav-link g-py-7 g-px-0">Contact Us</a>
+                                </li>
+                                <li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                    <a href="/Home/Register" class="nav-link g-py-7 g-px-0">Register</a>
+                                </li>
+                                <li class="nav-item g-mx-10--lg g-mx-15--xl">
+                                    <a href="/user/home/index" class="nav-link g-py-7 g-px-0">Profile</a>
+                                </li>
+                                @*
+                                    <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+                                        <a id="nav-link--home" class="nav-link g-py-7 g-px-0" href="#"
+                                           aria-haspopup="true"
+                                           aria-expanded="false"
+                                           aria-controls="nav-submenu--home">Home</a>*@
+                                <!-- Submenu -->
+                                @*<ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-20 g-mt-15--lg--scrolling" id="nav-submenu--home"
+                                          aria-labelledby="nav-link--home">
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-1.html">Home 1</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-2.html">Home 2</a></li>
+                                        <li class="dropdown-item"><a class="nav-link" href="../../unify-main/home/home-page-3.html">Home 3</a></li>
+                                    </ul>*@
+                                <!-- End Submenu -->
+
+                            </ul>
+                        </div>
+                        <!-- End Navigation -->
+                        <!--  Layout used for loggedin users, so only logout button should be shown -->
+                        <div class="d-inline-block hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+                            <a class="btn u-btn-outline-primary g-font-size-13 text-uppercase g-py-10 g-px-15" href="#" ng-click="layoutHelpCtrl.logOut()">Logout</a>
+                        </div>
+                        @if (Model.HelpList.Count > 0)
+                        {
+                            <div style="padding-left:10px;">
+                                <a href="#" ng-click="layoutHelpCtrl.getHelpData()" data-target="#helpModal" data-toggle="modal">
+                                    <i class="fa fa-question-circle fa-2x" aria-hidden="true" style="color:yellowgreen;"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- End Header -->
+        <!-- Promo Block -->
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        <!-- End News -->
+        <hr class="g-brd-gray-light-v4 my-0">
+        <!-- Footer -->
+        <footer class="container g-pt-100 g-pb-60">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 g-mb-30">
+                    <a class="d-inline-block mb-4" href="#">
+                        <img class="g-width-170 g-height-auto" src="~/assets/img/logo/memeni-logo_170w.png" alt="Image Description">
+                    </a>
+                    <p class="g-color-gray-dark-v4 g-font-size-13 mb-0">2017 © All Rights Reserved.</p>
+                </div>
+                <div class="col-sm-4 col-lg-2 ml-auto g-mb-30">
+                    <!-- Links -->
+                    <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-13 mb-0">
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/Home/About">About Us</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Services</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/Home/Contact">Contact Us</a></li>
+                    </ul>
+                    <!-- End Links -->
+                </div>
+                <div class="col-sm-4 col-lg-2 g-mb-30">
+                    <!-- Links -->
+                    <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-13 mb-0">
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">Support &amp; FAQ</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/terms/index">Terms &amp; Conditions</a></li>
+                        <li class="my-2"><i class="mr-2 fa fa-angle-right"></i> <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/privacy/Policies">Privacy &amp; Policy</a></li>
+                    </ul>
+                    <!-- End Links -->
+                </div>
+                <div class="col-sm-4 col-lg-2 g-mb-30">
+                    <h3 class="h6 g-color-black g-font-weight-600 text-uppercase mb-4">Follow Us</h3>
+                    <!-- Social Icons -->
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://www.facebook.com/GoMemeni/">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-teal g-bg-teal-opacity-0_1 g-color-teal--hover rounded-circle" href="https://twitter.com/gomemeni">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://plus.google.com/110045845911740344940">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-google-plus"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                            <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-purple g-bg-purple-opacity-0_1 g-color-purple--hover rounded-circle" href="https://www.linkedin.com/company-beta/3159463/">
+                                <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
+                                <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End Social Icons -->
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+    </main>
+    <!-- JS Global Compulsory -->
+    @Scripts.Render("~/bundles/unify")
+    <!-- JS Unify -->
+    @Scripts.Render("~/bundles/templatescripts")
+    <!-- JS Customization -->
+    @Scripts.Render("~/assets/js/custom.js")
+    <!-- JS Plugins Init. -->
+    @Scripts.Render("~/bundles/hsmegamenu")
+    <!---JQuery---->
+    @Scripts.Render("~/bundles/jquery")
+    <!-- Angular -->
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/Scripts/angular-summernote.js")
+    @Scripts.Render("~/Scripts/angular-drag-and-drop-lists.js")
+    @Scripts.Render("~/Scripts/dirPagination.js")
+    @Scripts.Render("~/plugins/angular-toastr")
+
+    <!-- Main App -->
+    @Scripts.Render("~/bundles/mainapp")
+    <script src="~/Scripts/Auth/LoginCtrl.js"></script>
+    <script src="~/Scripts/Auth/AuthService.js"></script>
+    @Scripts.Render("~/bundles/layouthelp")
+    @Scripts.Render("~/bundles/genericservice")
+
+    @RenderSection("scripts", required: false)
+
+    <!-- Help Modal -->
+    <div class="modal inmodal" id="helpForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">help form title</h4>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <h2>help form goes here</h2>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-105648823-1', 'auto');
+    ga('send', 'pageview');
+
+</script>

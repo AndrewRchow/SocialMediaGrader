@@ -1,0 +1,38 @@
+﻿<div>
+    <div ng-controller="IndexController as IndexCtr">
+        <div>
+            <button ng-click="IndexCtr.postButton()" name=".postUrlAddress" class="btn btn-primary space">Add</button>
+        </div>
+
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Url</td>
+                    <td>ModifiedBy</td>
+                    <td>Created Date</td>
+                    <td>Modifed Date</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in IndexCtr.allUrls">
+                    <td>{{x.id}}</td>
+                    <td>{{x.url}}</td>
+                    <td>{{x.modifiedBy}}</td>
+                    <td>{{x.createdDate}}</td>
+                    <td>{{x.modifiedDate}}</td>
+                    <td>
+                        <input {{x.id}} ng-click="IndexCtr.editButton(x.id)" type="button" value="Edit" />
+                        <input {{x.id}} ng-click="IndexCtr.deleteUrlButton(x.id, $index)" type="button" class="btn-danger" value="Delete" />  @*IndexCtr.deleteUrlButton(x.id)*@
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Scripts/UrlAddress/UrlService.js"></script>
+    <script src="~/Scripts/UrlAddress/Index.js"></script>
+}
+

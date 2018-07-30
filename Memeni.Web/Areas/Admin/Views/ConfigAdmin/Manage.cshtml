@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+@model Memeni.Models.ViewModels.ItemViewModel<int>
+<div ng-controller="manageController as manageCtrl">
+    <input type="hidden" value="@Model.Item" id="modelId" />
+
+    <form name="configForm" class="form-horizontal col-md-6">
+        <div class="space-15"></div>
+        <div class="row">
+            <button ng-click="manageCtrl.backBtn()" name=".postConfigSettings" class="btn btn-primary btn-sm">Back to Index</button>
+        </div>
+        <fieldset>
+            <div class="form-group">
+                <label class="control-label" for="configName">Config Name</label>
+                <input ng-model="manageCtrl.storeConfig.configName"
+                       id="configName"
+                       name="configName"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">valid settings of form </p>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="configValue">Config Value</label>
+                <input ng-model="manageCtrl.storeConfig.configValue"
+                       id="configValue"
+                       name="configValue"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">a name is reqired</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="description">Description</label>
+                <input ng-model="manageCtrl.storeConfig.description"
+                       id="description"
+                       name="description"
+                       type="text"
+                       class="form-control input-md"
+                       required /> 
+
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">a name is reqired</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="configTypeId">Data Type</label>
+                <select ng-model="manageCtrl.storeConfig.configTypeId" ng-options="x.id as x.displayName for x in manageCtrl.dataCategoriesDisplayName">
+                </select>
+            </div> 
+            <div class="form-group">
+                <label class="control-label" for="configCategoryId">Category</label>
+                <select ng-model="manageCtrl.storeConfig.configCategoryId" ng-options="x.id as x.displayName for x in manageCtrl.configCategoriesDisplayName">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="modifiedBy">Modified By</label>
+                <input ng-model="manageCtrl.storeConfig.modifiedBy"
+                       id="modifiedBy"
+                       name="modifiedBy"
+                       type="text"
+                       class="form-control input-md"
+                       required />
+
+                <p ng-show="configForm.settings.$invalid && !configForm.settings.$pristine">a name is reqired</p>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" ng-click="manageCtrl.submitBtn(configForm.$valid)"
+                        type="submit"
+                        ng-disabled="configForm.$invalid"
+                        name=".postConfigSettings">
+                    Submit
+                </button>
+                @*<p>{{manageCtrl.storeConfig}}</p>*@
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/config")
+}
+
+

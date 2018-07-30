@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+<style>
+    .disabled {
+        color: #ddd;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
+<body>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error Log </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/Admin/Home/Index">Admin</a>
+                </li>
+                <li class="active">
+                    <strong>Error Log</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        Error Log Table
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid" ng-controller="errorIndexController as errorIndexCtrl">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form>
+                                        <div class="form-group col-sm-5">
+                                            <span class="label label-default">Search/Filter</span>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+                                                <a class="input-group-addon" ng-click="errorIndexCtrl.searchTerm(searchText)"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-5" align="center">
+                                            <h5 ng-cloak>Showing {{errorIndexCtrl.showingFirst}} - {{errorIndexCtrl.showingLast}} of {{errorIndexCtrl.item.recordsFiltered}} Errors</h5>
+                                            <button class="label label-default" ng-cloak ng-show="errorIndexCtrl.item.recordsTotal>errorIndexCtrl.item.recordsFiltered" ng-click="errorIndexCtrl.resetFilter()">Reset Filter</button>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <span class="label label-default">Display per Page</span>
+                                            <select class="form-control" ng-model="display" ng-change="errorIndexCtrl.displayPage(display)">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <table class="table table-hover table-condensed table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(0)" style="text-decoration:none; color:inherit;">
+                                                        <i class="" aria-hidden="true"></i>Id
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '0' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '0' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(1)" style="text-decoration:none; color:inherit;">
+                                                        <i class="" aria-hidden="true"></i>Error Message
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '1' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '1' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(2)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Error Number
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '2' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '2' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th class="hidden">
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(3)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Modified Date
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '3' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '3' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-model-options="{timezone: 'utc'}" ng-click="errorIndexCtrl.sortOrder(4)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Created Date
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '4' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '4' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(5)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Modified By
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '5' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '5' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(6)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Error Severity
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '6' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '6' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(7)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Error State
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '7' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '7' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(8)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Error Procedure
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '8' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '8' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="errorIndexCtrl.sortOrder(9)" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-error-circle-o" aria-hidden="true"></i>Error Line
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '9' && errorIndexCtrl.config[0].sortDir == 'asc'" class="fa fa-caret-down"></span>
+                                                        <span ng-show="errorIndexCtrl.config[0].sortCol == '9' && errorIndexCtrl.config[0].sortDir == 'desc'" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th><input type="checkbox" name="" ng-model="errorIndexCtrl.selectAll" ng-checked="errorIndexCtrl.exist(items)" ng-click="errorIndexCtrl.checkAll()" /></th>
+                                                <th>Select All</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="items in errorIndexCtrl.item.data" ng-cloak>
+                                                <td><strong>{{items.id}}</strong></td>
+                                                <td>{{items.errorMessage}}</td>
+                                                <td>{{items.errorNumber}}</td>
+                                                <td class="hidden">{{items.modifiedDate}}</td>
+                                                <td>{{items.createDate | date:"MM/dd/yyyy 'at' h:mma" : '-1400'}}</td>
+                                                <td>{{items.modifiedBy}}</td>
+                                                <td>{{items.errorSeverity}}</td>
+                                                <td>{{items.errorState}}</td>
+                                                <td>{{items.errorProcedure}}</td>
+                                                <td>{{items.errorLine}}</td>
+                                                <td><input type="checkbox" name="" ng-model="selected" ng-checked="errorIndexCtrl.exist(items.id)" ng-click="errorIndexCtrl.toggleSelection(items.id)" /></td>
+                                                <!--ng-click="errorIndexCtrl.deleteRowButton(items.id, $index)-->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-inline"   align="center">
+                                        <ul class="pagination">
+                                            <li><a href="#" ng-class="{'disabled': errorIndexCtrl.config[0].displayStart == 0}" ng-click="errorIndexCtrl.pagination('start')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" ng-class="{'disabled': errorIndexCtrl.config[0].displayStart == 0}" ng-click="errorIndexCtrl.pagination('previous')"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" class="disabled" ng-cloak>{{errorIndexCtrl.page}}</a></li>
+                                            <li><a href="#" ng-class="{'disabled': errorIndexCtrl.showingLast == errorIndexCtrl.item.recordsFiltered}" ng-click="errorIndexCtrl.pagination('next')"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" ng-class="{'disabled': errorIndexCtrl.showingLast == errorIndexCtrl.item.recordsFiltered}" ng-click="errorIndexCtrl.pagination('end')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                        <div class="pull-right">
+                                            <button id="deleteAllBtn" ng-click="errorIndexCtrl.deleteAllButton()" class="btn btn-sm btn-danger">Delete All</button>
+                                            <button id="deleteSelectedBtn" ng-click="errorIndexCtrl.deleteChecked()" class="btn btn-sm btn-danger">Delete Selected</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Styles {
+        @Styles.Render("~/plugins/sweetAlertStyles")
+    }
+    @section scripts{
+        <script src="~/Scripts/GenericService.js"></script>
+        <script src="~/Scripts/ErrorLog/NgErrorIndexController.js"></script>
+        @Scripts.Render("~/plugins/sweetAlert")
+    }
+</body>
+
+
+
+

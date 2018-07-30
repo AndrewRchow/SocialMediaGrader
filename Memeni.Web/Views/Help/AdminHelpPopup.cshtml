@@ -1,0 +1,48 @@
+﻿
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Help Items</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ul class="list-unstyled">
+                <li ng-repeat="item in layoutHelpCtrl.currentPageHelpItems" class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-primary-left g-rounded-3 g-pa-20 g-mb-7">
+                    <div style="padding-bottom:10px;">
+                        <form>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" ng-model="item.title" class="form-control form-control-md rounded-0" id="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="textArea">Response</label>
+                                <textarea ng-model="item.helpMsg" class="form-control form-control-md rounded-0" id="textArea" rows="3"></textarea>
+                            </div>
+                        </form>                                                  
+                    </div>
+                    <div style="text-align:center; padding-bottom:10px;">
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                        <strong>Date Created:</strong> {{item.createdDate | date:'MM/dd/yyyy h:mma': '-1400'}}
+                        <br />
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <strong>Date Modified:</strong> {{item.modifiedDate | date:'MM/dd/yyyy h:mma': '-1400'}}
+                        <br />
+                        <i class="fa fa-id-badge" aria-hidden="true"></i>
+                        <strong>Modified By:</strong> {{item.modifiedBy}}
+                    </div>
+                    <div style="text-align:center;">
+                        <button type="button" ng-click="layoutHelpCtrl.saveEditClick(item)"class="btn u-btn-primary g-font-weight-600 g-rounded-0">Save Edit</button>
+                        <button type="button" ng-click="layoutHelpCtrl.deleteClick(item.id, $index)" class="btn u-btn-primary g-font-weight-600 g-rounded-0">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" hidden>Close</button>
+        </div>
+    </div>
+</div>
+
+

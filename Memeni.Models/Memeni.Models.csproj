@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7151F50-29BB-4EAC-88F1-CDBE038A069B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Memeni.Models</RootNamespace>
+    <AssemblyName>Memeni.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\AnonTrackingGrid.cs" />
+    <Compile Include="Domain\AnonUser.cs" />
+    <Compile Include="Domain\AnonUserUrls.cs" />
+    <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Config.cs" />
+    <Compile Include="Domain\ConfigCategory.cs" />
+    <Compile Include="Domain\ConfigType.cs" />
+    <Compile Include="Domain\EmailCode.cs" />
+    <Compile Include="Domain\EmailMessage.cs" />
+    <Compile Include="Domain\ErrorLog.cs" />
+    <Compile Include="Domain\ErrorLogGrid.cs" />
+    <Compile Include="Domain\ErrorLogSeverity.cs" />
+    <Compile Include="Domain\Faq.cs" />
+    <Compile Include="Domain\FaqCategory.cs" />
+    <Compile Include="Domain\FbFansData.cs" />
+    <Compile Include="Domain\FbFeed.cs" />
+    <Compile Include="Domain\FbPostData.cs" />
+    <Compile Include="Domain\FbReport.cs" />
+    <Compile Include="Domain\FbTalking.cs" />
+    <Compile Include="Domain\FileResult.cs" />
+    <Compile Include="Domain\GoogleRecaptchaResponse.cs" />
+    <Compile Include="Domain\Help.cs" />
+    <Compile Include="Domain\HelpCategories.cs" />
+    <Compile Include="Domain\HelpGrid.cs" />
+    <Compile Include="Domain\MetaTags.cs" />
+    <Compile Include="Domain\MetaUrl.cs" />
+    <Compile Include="Domain\PageMetaTags.cs" />
+    <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Phone.cs" />
+    <Compile Include="Domain\Privacy.cs" />
+    <Compile Include="Domain\Profile\Cookie.cs" />
+    <Compile Include="Domain\Profile\ProfileCompany.cs" />
+    <Compile Include="Domain\Profile\ProfilePerson.cs" />
+    <Compile Include="Domain\Profile\ProfilePhone.cs" />
+    <Compile Include="Domain\Profile\UserProfile.cs" />
+    <Compile Include="Domain\Report.cs" />
+    <Compile Include="Domain\Salesforce.cs" />
+    <Compile Include="Domain\SME.cs" />
+    <Compile Include="Domain\Tnc.cs" />
+    <Compile Include="Domain\TwitterBearer.cs" />
+    <Compile Include="Domain\TwitterByDate.cs" />
+    <Compile Include="Domain\TwitterCounter.cs" />
+    <Compile Include="Domain\TwitterReport.cs" />
+    <Compile Include="Domain\TwitterSearch.cs" />
+    <Compile Include="Domain\TwitterTimeline.cs" />
+    <Compile Include="Domain\UrlAddress.cs" />
+    <Compile Include="Domain\UserBase.cs" />
+    <Compile Include="Domain\UserDashFb.cs" />
+    <Compile Include="Domain\Users.cs" />
+    <Compile Include="Domain\UsersGrid.cs" />
+    <Compile Include="Interfaces\IUserAuthData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AddGoogleId.cs" />
+    <Compile Include="Requests\AnonTrackingGridRequest.cs" />
+    <Compile Include="Requests\AnonUserAddRequest.cs" />
+    <Compile Include="Requests\AnonUserChangeRequest.cs" />
+    <Compile Include="Requests\CompanyAddRequest.cs" />
+    <Compile Include="Requests\CompanyFileIdsRequest.cs" />
+    <Compile Include="Requests\CompanyUpdateRequest.cs" />
+    <Compile Include="Requests\ConfigAddRequest.cs" />
+    <Compile Include="Requests\ConfigCategoryAddRequest.cs" />
+    <Compile Include="Requests\ConfigCategoryUpdateRequest.cs" />
+    <Compile Include="Requests\ConfigDataAddRequest.cs" />
+    <Compile Include="Requests\ConfigDataUpdateRequest.cs" />
+    <Compile Include="Requests\ConfigUpdateRequest.cs" />
+    <Compile Include="Requests\EmailMessageAddRequest.cs" />
+    <Compile Include="Requests\EmailMessageUpdateRequest.cs" />
+    <Compile Include="Requests\ErrorLogAddRequest.cs" />
+    <Compile Include="Requests\ErrorLogDeleteRequest.cs" />
+    <Compile Include="Requests\ErrorLogGridRequest.cs" />
+    <Compile Include="Requests\ErrorLogUpdateRequest.cs" />
+    <Compile Include="Requests\FaqAddRequest.cs" />
+    <Compile Include="Requests\FaqCategoryAddRequest.cs" />
+    <Compile Include="Requests\FaqCategoryUpdateRequest.cs" />
+    <Compile Include="Requests\FaqUpdateRequest.cs" />
+    <Compile Include="Requests\FbProfileAddRequest.cs" />
+    <Compile Include="Requests\ForgotPwRequest.cs" />
+    <Compile Include="Requests\HelpAddRequest.cs" />
+    <Compile Include="Requests\HelpCategoriesAddRequest.cs" />
+    <Compile Include="Requests\HelpCategoriesUpdateRequest.cs" />
+    <Compile Include="Requests\HelpGridRequest.cs" />
+    <Compile Include="Requests\HelpUpdateRequest.cs" />
+    <Compile Include="Requests\LogoAddRequest.cs" />
+    <Compile Include="Requests\LogoUpdateRequest.cs" />
+    <Compile Include="Requests\MetaUrlAddRequest.cs" />
+    <Compile Include="Requests\MetaUrlUpdateLockRequest.cs" />
+    <Compile Include="Requests\MetaUrlUpdateRequest.cs" />
+    <Compile Include="Requests\PageMetaTagsAddRequest.cs" />
+    <Compile Include="Requests\PageMetaTagsUpdateRequest.cs" />
+    <Compile Include="Requests\PageMetaTagsUpdateValueRequest.cs" />
+    <Compile Include="Requests\PersonAddRequest.cs" />
+    <Compile Include="Requests\PersonUpdateRequest.cs" />
+    <Compile Include="Requests\PhoneAddRequest.cs" />
+    <Compile Include="Requests\PhoneUpdateRequest.cs" />
+    <Compile Include="Requests\PrivacyAddRequest.cs" />
+    <Compile Include="Requests\PrivacyUpdateRequest.cs" />
+    <Compile Include="Requests\Profile\ProfileAddRequest.cs" />
+    <Compile Include="Requests\Profile\ProfileCompanyRequest.cs" />
+    <Compile Include="Requests\Profile\ProfilePersonRequest.cs" />
+    <Compile Include="Requests\Profile\ProfilePhoneRequest.cs" />
+    <Compile Include="Requests\RecaptchaRequest.cs" />
+    <Compile Include="Requests\RegisterUserFacebookRequest.cs" />
+    <Compile Include="Requests\RegisterUserGoogleRequest.cs" />
+    <Compile Include="Requests\RegisterUserLinkedInRequest.cs" />
+    <Compile Include="Requests\RegisterUserRequest.cs" />
+    <Compile Include="Requests\ReportAddRequest.cs" />
+    <Compile Include="Requests\ResendEmailRequest.cs" />
+    <Compile Include="Requests\ResetPwRequest.cs" />
+    <Compile Include="Requests\SalesforceAddRequest.cs" />
+    <Compile Include="Requests\SalesforceUpdateRequest.cs" />
+    <Compile Include="Requests\SMEAddRequest.cs" />
+    <Compile Include="Requests\SMEUpdateRequest.cs" />
+    <Compile Include="Requests\TncAddRequest.cs" />
+    <Compile Include="Requests\TncUpdateRequest.cs" />
+    <Compile Include="Requests\UrlAddressAddRequest.cs" />
+    <Compile Include="Requests\UrlAddressUpdateRequest.cs" />
+    <Compile Include="Requests\UserDashAddRequest.cs" />
+    <Compile Include="Requests\UserFreeRequest.cs" />
+    <Compile Include="Requests\UserRequest.cs" />
+    <Compile Include="Requests\UsersGridRequest.cs" />
+    <Compile Include="Requests\UsersUpdateRequest.cs" />
+    <Compile Include="Responses\BaseResponse.cs" />
+    <Compile Include="Responses\ErrorResponse.cs" />
+    <Compile Include="Responses\ItemResponse.cs" />
+    <Compile Include="Responses\ItemsResponse.cs" />
+    <Compile Include="Responses\SuccessResponse.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ConfigIndexModel.cs" />
+    <Compile Include="ViewModels\FaqIndexModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\JsViewModel.cs" />
+    <Compile Include="ViewModels\MemeniViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

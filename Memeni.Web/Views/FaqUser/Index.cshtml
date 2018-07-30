@@ -1,0 +1,68 @@
+﻿
+<style>
+    .noBox {
+        margin: 50px;
+        outline: none;
+    }
+
+    .questions {
+        text-align: center;
+        margin: 25px;
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    h4 {
+        font-weight: bold;
+    }
+
+
+    footer {
+        background-color: white;
+    }
+</style>
+
+<div ng-controller="IndexFaqController as FaqIndexCtrl">
+    <div class="container">
+        <div class="container1">
+            <h2 class="header text-center">Frequently Asked Questions!</h2>
+
+
+            <div ng-model="display" class="noBox" ng-repeat="x in FaqIndexCtrl.allFaqs">
+                <i ng-hide="showDetails" class="fa fa-caret-left pull-right"></i>
+                <i ng-cloak ng-show="showDetails" class="fa fa-caret-down pull-right"></i>
+                <div class="col-md-4"></div>
+                <h4 class="tpull-left" ng-cloak ng-click="showDetails = ! showDetails"> {{x.title}} </h4>
+                <h5 class="pull-left" ng-cloak ng-show="showDetails"> {{x.description}} </h5>
+                <div class="col-md-4"></div>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/GenericService.js"></script>
+    @Scripts.Render("~/bundles/faq")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

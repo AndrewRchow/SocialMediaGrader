@@ -1,0 +1,18 @@
+/*------------------------------------
+  Go To v1
+------------------------------------*/
+
+.u-go-to-v1 {
+  z-index: 5;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  transition: .3s ease-out;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

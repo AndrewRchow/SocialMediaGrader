@@ -1,0 +1,47 @@
+/*------------------------------------
+  Box-shadows Styles
+------------------------------------*/
+
+.u-shadow-none {
+  box-shadow: none !important;
+
+  &--focus:focus {
+    box-shadow: none !important;
+  }
+
+  &--parent-hover {
+    .g-parent:hover & {
+      box-shadow: none !important;
+    }
+  }
+}
+
+//
+// Imports
+//
+
+@import "box-shadows-v1";
+@import "box-shadows-v2";
+@import "box-shadows-v3-v4-v5";
+@import "box-shadows-v6";
+@import "box-shadows-v7";
+@import "box-shadows-v8";
+@import "box-shadows-v9";
+@import "box-shadows-v10";
+@import "box-shadows-v11";
+@import "box-shadows-v12";
+@import "box-shadows-v13";
+@import "box-shadows-v14";
+@import "box-shadows-v15";
+@import "box-shadows-v16";
+@import "box-shadows-v17";
+@import "box-shadows-v18";
+@import "box-shadows-v19";
+@import "box-shadows-v20";
+@import "box-shadows-v21";
+@import "box-shadows-v22";
+@import "box-shadows-v23";
+@import "box-shadows-v24";
+@import "box-shadows-v25";
+@import "box-shadows-v26";
+@import "box-shadows-v27";

@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Social Media Integration";
+}
+
+    <style>
+        .jumbotron {
+            background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+            color: black;
+            padding: 100px 25px;         
+        }
+        .spacingForm {
+            padding-left: 50px;
+        }
+    </style>
+    <div class="jumbotron">
+        <h1>Social Media Integration</h1>
+        <blockquote>
+            Engagement is one of the most critical ways that you can measure
+        how well your content - your messaging - is resonating with your audience.
+        Every company should be aiming to generate and increase their engagement on 
+        social media: it produces brand affinity, generates website traffic, and amplifies 
+        your messaging beyond your audience.
+        </blockquote>
+    </div>
+    <div ng-controller="smeController as smeCtrl">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-heading"><h4>Number of Social Media Interactions</h4></div>
+                    <div class="panel-body">
+                        <small>
+                            It’s not just about delivering content - that content needs to resonate with your audience.
+                            Take a look at audience interactions to see how your community is responding to your
+                            content. And look at whether you are succeeding at engaging your potential customers.
+                            If they are, next you will want to understand why.
+                        </small>
+                    </div>
+                    <div class="panel-footer"><a class="btn btn-primary" href="/SME/Create">Add New Post</a></div>
+                </div>
+                <div class="container col-sm-6 spacingForm">
+                    <div class="title"><h4>Total Average</h4></div>
+                    <div>
+                        <p class="bg-danger">Minimum Interactions Per 1000 Fans <h4 class="text-danger" ng-cloak>{{smeCtrl.avg[0]}}</h4></p>
+                        <p class="bg-info">Maximum Interactions Per 1000 Fans <h4 class="text-info" ng-cloak>{{smeCtrl.avg[1]}}</h4></p>
+                        <p class="bg-success">Sum of All Interactions Per 1000 Fans <h4 class="text-success" ng-cloak>{{smeCtrl.avg[2]}}</h4></p>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search User" ng-model="search.modifiedBy">
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+                        <input type="text" class="form-control" placeholder="Search Created Date" ng-model="search.createdDate">
+                    </div>
+                </div>
+            </form>
+            <table class="table table-hover table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <a href="#" ng-click="sortType = 'modifiedBy'; sortReverse = !sortReverse">
+                                User ID
+                                <span ng-show="sortType == 'modifiedBy' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'modifiedBy' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'createdDate'; sortReverse = !sortReverse">
+                                Created Date & Time
+                                <span ng-show="sortType == 'createdDate' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'createdDate' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'modifiedDate'; sortReverse = !sortReverse">
+                                Modified Date & Time
+                                <span ng-show="sortType == 'modifiedDate' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'modifiedDate' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                        <th>                           
+                            <a href="#" ng-click="sortType = 'minInteractionsPer1k'; sortReverse = !sortReverse">
+                                Min Int. per 1000 Fans
+                                <span ng-show="sortType == 'minInteractionsPer1k' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'minInteractionsPer1k' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'maxInteractionsPer1k'; sortReverse = !sortReverse">
+                                Max Int. per 1000 Fans
+                                <span ng-show="sortType == 'maxInteractionsPer1k' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'maxInteractionsPer1k' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'sumInteractionsPer1k'; sortReverse = !sortReverse">
+                                Sum Int. per 1000 Fans
+                                <span ng-show="sortType == 'sumInteractionsPer1k' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                <span ng-show="sortType == 'sumInteractionsPer1k' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="items in smeCtrl.items | filter: search:strict | orderBy:sortType:sortReverse">
+                    <tr>
+                        <td ng-cloak><strong>{{items.modifiedBy}}</strong></td>
+                        <td ng-cloak>{{items.createdDate | limitTo:16}}</td>
+                        <td ng-cloak>{{items.modifiedDate | limitTo:16}}</td>
+                        <td class="text-danger" ng-cloak>{{items.minInteractionsPer1k}}</td>
+                        <td class="text-info" ng-cloak>{{items.maxInteractionsPer1k}}</td>                        
+                        <td class="text-success" ng-cloak>{{items.sumInteractionsPer1k}}</td>  
+                        <td ng-cloak><a class="label label-warning" href="/SME/{{items.id}}/Edit">Edit</a></td>
+                        <td ng-cloak><a class="label label-danger" ng-click="smeCtrl.deleteById($index,items.id)">Delete</a></td>
+                    </tr>                   
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+   </div>
+
+@section scripts{    
+    @Scripts.Render("~/bundles/sme")      
+}
+</body>

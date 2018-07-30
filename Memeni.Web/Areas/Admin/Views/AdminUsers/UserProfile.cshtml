@@ -1,0 +1,202 @@
+﻿@model Memeni.Models.ViewModels.ItemViewModel<int>
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+<input id="modelId" type="hidden" value="@Model.Item" />
+<div class="container-fluid ng-cloak" ng-controller="adminProfileIndexController as aProIndexCtrl">
+    <div class="wrapper col-sm-6 col-sm-offset-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>User Profile</h4>
+            </div>
+            <div class="panel-body">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="wrapper contact-box">
+                                <a class="pull-right" ng-click="aProIndexCtrl.edit(aProIndexCtrl.item.userId)" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <img class="img-circle m-t-sm img-responsive" ng-src="/Uploads/{{aProIndexCtrl.item.systemFileName}}" onerror="this.src='https://cdn2.iconfinder.com/data/icons/pittogrammi/142/32-128.png'" alt="Image Description"/>
+                                        <div class="m-t-xs font-bold">{{aProIndexCtrl.item.companyName}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h4><strong><a href="//{{aProIndexCtrl.item.companyUrl}}">{{aProIndexCtrl.item.companyUrl}}</a></strong></h4>
+                                    <p><strong>{{aProIndexCtrl.item.firstName}} {{aProIndexCtrl.item.middleName}} {{aProIndexCtrl.item.lastName}}</strong></p>
+                                    <abbr title="Phone Number"><strong>Ph: </strong></abbr><a href="tel:+{{aProIndexCtrl.item.countryCode}}{{aProIndexCtrl.item.phoneNumber}}">{{aProIndexCtrl.item.countryCode}} {{aProIndexCtrl.item.phoneNumber}}</a>
+                                    <abbr title="Extension"><strong>Ext: </strong></abbr><span>{{aProIndexCtrl.item.extension}}</span>
+                                    <br />
+                                    <br />
+                                    <p><strong>Email Address: </strong>{{aProIndexCtrl.item.email}}</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <strong>Registered Date: </strong>{{aProIndexCtrl.item.dateCreated | date: 'longDate' }}
+                <a class="pull-right" href="https://www.memeni.dev/admin/users/index">Return to user index page</a>
+            </div>
+        </div>
+    </div>
+
+
+    @*EDIT MODAL*@
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-id-card-o modal-icon"></i>
+                    <h4 class="modal-title">Edit Profile</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5><strong>User Id: </strong>{{aProIndexCtrl.item.id}} </h5>
+                            <h5 class="pull-right"><strong>Email: </strong>{{aProIndexCtrl.item.email}}</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="panel-body">
+                                <div class="panel-group" id="accordion">
+
+                                    @*NAME FORM*@
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Name<i class="fa fa-angle-double-down fa-lg pull-right"></i></a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="well well-sm">
+                                                    <form name="personForm" class="form-horizontal" novalidate">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">First Name:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="firstName" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.firstName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Middle Name:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="middleName" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.middleName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Last Name:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="lastName" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.lastName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <button class="btn btn-sm btn-primary btn-outline pull-right" type="button" name="saveProfilePerson" ng-click="aProIndexCtrl.saveProfilePerson()">Save</button>
+                                                                @*<button class="btn btn-sm btn-success btn-outline pull-left" type="button">Clear</button>*@
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*COMPANY FORM*@
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Company<i class="fa fa-angle-double-down fa-lg pull-right"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <div class="well well-sm">
+                                                    <form name="companyForm" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Company Name:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="companyName" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.companyName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Company URL:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="companyUrl" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.companyUrl">
+                                                            </div>
+                                                        </div>                                                      
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <button class="btn btn-sm btn-primary btn-outline pull-right" type="button" name="saveProfileCompany" ng-click="aProIndexCtrl.saveProfileCompany()">Save</button>
+                                                                @*<button class="btn btn-sm btn-success btn-outline pull-left" type="button">Clear</button>*@
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*PHONE FORM*@
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Phone<i class="fa fa-angle-double-down fa-lg pull-right"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <div class="well well-sm">
+                                                    <form name="phoneForm" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Country Code:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="countryCode" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.countryCode">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Phone Number:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="phoneNumber" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.phoneNumber">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Extension:</label>
+                                                            <div class="col-md-8">
+                                                                <input name="extension" type="text" class="form-control input-md" ng-model="aProIndexCtrl.item.extension">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <button class="btn btn-sm btn-primary btn-outline pull-right" type="button" name="saveProfilePhone" ng-click="aProIndexCtrl.saveProfilePhone()">Save</button>
+                                                                @*<button class="btn btn-sm btn-success btn-outline pull-left" type="button">Clear</button>*@
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/GenericService.js"></script>
+    <script src="~/Scripts/Profile/AdminProfileIndexController.js"></script>
+}
+

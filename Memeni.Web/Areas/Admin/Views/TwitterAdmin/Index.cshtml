@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Twitter Admin Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+<!-- Insert Page Controller -->
+<div>
+    <!-- Heading -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-twitter"></i> Twitter</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/admin/home/index">Admin</a>
+                </li>
+                <li>
+                    <a href="/admin/twitter/index">Twitter</a>
+                </li>
+                <li class="active">
+                    <strong>Index</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <!-- End Heading -->
+    <!-- Wrapper Content -->
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Twitter OAuth 2 Bearer Token</h5><br /><br />
+                        <p>Allows a registered application to obtain an OAuth 2 Bearer Token, which can be used to make API requests on an application’s own behalf, without a user context. This is called Application-only authentication.</p>
+                        <p>A Bearer Token may be invalidated using oauth2/invalidate_token. Once a Bearer Token has been invalidated, new creation attempts will yield a different Bearer Token and usage of the previous token will no longer be allowed.</p>
+                        <p>Only one bearer token may exist outstanding for an application, and repeated requests to this method will yield the same already-existent token until it has been invalidated.</p>
+                        <p><strong>Warning: </strong>If attempted too frequently, requests will be rejected with a HTTP 403 with code 99.</p>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consumer Key (API Key)</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consumer Secret (API Secret)</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">Generate</button>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Bearer Token: </label>
+                                <div class="col-sm-10">
+                                    <div style="padding-top:7px">{{bearerToken}}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">Copy and Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ibox-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Wrapper Content -->
+</div>

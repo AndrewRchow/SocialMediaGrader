@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+<div class="col-lg-12 animated fadeInRight" ng-controller="emailController as emailCtrl">
+    <div class="mail-box-header">
+        <div class="pull-right tooltip-demo">
+            <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+            <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+        </div>
+        <h2>
+            Compose mail
+        </h2>
+    </div>
+    <div class="mail-box">
+
+        <div class="mail-body">
+            <form class="form-horizontal" name="emailForm" novalidate ng-submit="emailCtrl.submit(emailForm.$valid)">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">To:</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="toEmail" ng-model="emailCtrl.item.toEmail"></div>
+                    <p ng-show="emailForm.toEmail.$invalid"> Please enter email</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Subject:</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="subject" ng-model="emailCtrl.item.subject"></div>
+                    <p ng-show="emailForm.subject.$invalid"> Please enter a subject</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Message:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="emailbody" ng-model="emailCtrl.item.emailBody">
+                        <p ng-show="emailForm.emailBody.$invalid"> Please enter your message</p>
+                    </div>
+           
+                </div>
+                <p>{{emailCtrl.item | json}}</p>
+                <div class="mail-body text-right tooltip-demo">
+                    <button class="btn btn-sm btn-primary" type="submit" name="submit"><i class="fa fa-reply"></i> Send</button>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                </div>
+              
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/summernoteStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/summernote")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.summernote').summernote();
+        });
+    </script>
+    <script src="~/Scripts/EmailMessage/EmailController.js"></script>
+    <script src="~/Scripts/EmailMessage/EmailMessageService.js"></script>
+}

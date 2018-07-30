@@ -1,0 +1,123 @@
+/*------------------------------------
+  Icons Styles
+------------------------------------*/
+//
+// Common Styles
+//
+
+.u-icon-v1,
+.u-icon-v2,
+.u-icon-v3,
+.u-icon-v4 {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  transition: all .2s ease-in-out;
+}
+.u-icon-v1:hover,
+.u-icon-v2:hover,
+.u-icon-v3:hover,
+.u-icon-v4:hover {
+  text-decoration: none;
+}
+.u-icon-v1::before,
+.u-icon-v2::before,
+.u-icon-v3::before {
+  display: block;
+}
+.u-icon-v1 > i,
+.u-icon-v2 > i,
+.u-icon-v3 > i,
+.u-icon-v4 > span > i {
+  position: relative;
+  top: 50%;
+  display: block;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+[class*="u-icon-v"] {
+  & .u-line-icon-pro {
+    transform: translateY(-45%);
+  }
+}
+
+
+
+//
+// Rotattion Style
+//
+
+.u-icon-rotation {
+  transform: rotate(45deg);
+
+  & .u-icon__elem {
+    transform: rotate(-45deg) translate(15%, -30%);
+  }
+  & .u-line-icon-pro {
+    transform: rotate(-45deg) translate(25%, -30%);
+  }
+}
+
+
+
+//
+// Imports
+//
+
+@import "icon-v1";
+@import "icon-v2";
+@import "icon-v3";
+@import "icon-v4";
+@import "icon-v5";
+@import "icons-image";
+
+@import "icons-block-hover";
+@import "icon-hover-scale";
+@import "icon-hover-shadow";
+@import "icon-hover-slide-v1";
+@import "icon-hover-slide-v2";
+@import "icon-hover-zoom";
+@import "icon-hover-shape";
+@import "icon-hover-effect-1";
+@import "icon-hover-effect-2";
+@import "icon-hover-effect-3";
+@import "icon-hover-effect-4";
+@import "icon-hover-effect-5";
+
+//
+// Others
+//
+
+// .u-icon-brd-gray {
+//   &-light-v11 {
+//     color: $g-color-gray-dark-v5;
+//     &::before,
+//     &::after {
+//       background: {
+//         color: $g-color-gray-dark-v5;
+//       }
+//     }
+//   }
+// }
+
+// .u-icon-brd-v1 {
+//   display: inline-block;
+//   padding: 0 10px;
+//   position: relative;
+//   &::before,
+//   &::after {
+//     content: "";
+//     width: 100px;
+//     height: 1px;
+//     margin-top: -1px;
+//     position: absolute;
+//     top: 50%;
+//   }
+//   &::before {
+//     left: 100%;
+//   }
+//   &::after {
+//     right: 100%;
+//   }
+// }

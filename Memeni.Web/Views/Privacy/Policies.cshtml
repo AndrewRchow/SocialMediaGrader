@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+<style>
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+    }
+</style>
+<div class="ng-cloak" ng-controller="PoliciesController as PoliciesCtr">
+    <section class="container g-pt-100 g-pb-60">
+        <div class="js-scrollbar card-block  u-info-v1-1 g-bg-white-gradient-v1--after g-height-680 g-pa-0 mCustomScrollbar _mCS_3 mCS-autoHide" style="overflow: visible;">
+            <div id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
+                <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            <div ng-repeat="x in PoliciesCtr.allPolicies" ng-if="x.displayOrder == '0'">
+                                <h4 style="text-align:center"><b>{{x.title}}</b></h4>
+                            </div>
+                            <br />
+                            <br />
+                            <div ng-repeat="x in PoliciesCtr.allPolicies" ng-if="x.displayOrder == '1'">
+                                <h5 style="text-align:center"><b>{{x.title}}</b></h5>
+                                <hr />
+                                <h5 ng-bind-html="x.description"></h5>
+                            </div>
+                            <br />
+                            <h5><b>QUICK GUIDE TO CONTENTS</b></h5>
+                            <div style="margin-left:40px; margin-top:25px; color:rgb(100,168,38)"
+                                 ng-repeat="x in PoliciesCtr.allPolicies | orderBy : 'displayOrder'" ng-if="x.displayOrder != 0 && x.displayOrder !=1">
+                                <h5 style="cursor:pointer" ng-click="PoliciesCtr.goToAnchor(x.displayOrder)">
+                                    <b> {{x.title}}</b>
+                                </h5>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            @*Upper^   Lower v*@
+                            <div ng-repeat="x in PoliciesCtr.allPolicies | orderBy : 'displayOrder'" ng-if="x.displayOrder !='0' && x.displayOrder !='1'">
+                                <div id="anchor{{x.displayOrder}}"></div>
+                                <h5><b>{{x.title}}</b></h5>
+                                <h5 ng-bind-html="x.description"></h5>
+                                <br />
+                            </div>
+                            <input type="button" class="goToTop" value="Back to Top"
+                                   style="display:none;border-radius:20px; background-color:rgb(114,192,44); color:white" />
+                        </div>
+                    </div>
+                </div>
+                <div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
+                    <div class="mCSB_draggerContainer">
+                        <div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: auto; max-height: none; top: 0px;">
+                            <div class="mCSB_dragger_bar" style="line-height: 50px;">
+                            </div>
+                        </div>
+                        <div class="mCSB_draggerRail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/privacy")
+    <script src="~/Scripts/PrivacyPolicy/PrivacyService.js"></script>
+    <script src="~/Scripts/PrivacyPolicy/PoliciesController.js"></script>
+}

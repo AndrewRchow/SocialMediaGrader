@@ -1,0 +1,85 @@
+/*------------------------------------
+  Headings
+------------------------------------*/
+
+
+
+//
+// Heading's Colors
+//
+
+// /* Heading border primary */
+// .g-brd-primary {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-primary;
+//   }
+// }
+// /* Heading border white */
+// .g-brd-white {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-white;
+//   }
+// }
+// /* Heading border black */
+// .g-brd-black {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-black;
+//   }
+// }
+// /* Heading border gray-dark-v4 */
+// .g-brd-gray {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-gray-dark-v4;
+//   }
+// }
+
+// /* Heading border gray-light-v2 */
+// .g-brd-gray-light-v2 {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-gray-light-v2;
+//   }
+// }
+
+// .g-brd-gray-dark-v2 {
+//   &::before,
+//   &::after {
+//     border-color: $g-color-gray-dark-v2;
+//   }
+// }
+
+
+//
+// Imports
+//
+
+@import "heading-v1";
+@import "heading-v2";
+@import "heading-v3";
+@import "heading-v4";
+@import "heading-v5";
+@import "heading-v6";
+@import "heading-v7";
+@import "heading-v8";
+
+
+
+/* Massive Underline */
+.u-heading-massive-underline {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: .2em;
+    height: .3em;
+    background-color: $g-color-primary-light-v2;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,51 @@
+﻿@model Memeni.Models.ViewModels.ItemViewModel<int>
+<div>
+    <input  type="hidden" value="@Model.Item" id="modelId" />
+
+    <form name ="urlForm" class="form-horizontal col-md-6" ng-controller="ManageController as ManageCtr">
+
+        <button ng-click="ManageCtr.backButton()" name=".postUrlAddress" class="btn btn-default">Back</button>
+
+        <fieldset>
+            <div class="form-group">
+                <label class=" control-label" for="url">Url</label>
+                <div>
+                    <input ng-model="ManageCtr.storeUrl.url" 
+                           id="url" 
+                           name="url" 
+                           type="url" 
+                           class="form-control input-md" required>
+                    <p ng-show="urlForm.url.$invalid && !urlForm.url.$pristine">valid url of form http://website.com is required</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="modifiedBy">Modified By</label>
+                <div>
+                    <input ng-model="ManageCtr.storeUrl.modifiedBy" 
+                           id="modifiedBy" 
+                           name="modifiedBy" 
+                           type="text" 
+                           class="form-control input-md"
+                           required>
+                    <p ng-show="urlForm.modifiedBy.$invalid && !urlForm.modifiedBy.$pristine">a name is required</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <button ng-click="ManageCtr.submitButton(urlForm.$valid)" 
+                            ng-disabled="urlForm.$invalid" 
+                            name=".postUrlAddress" 
+                            class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section scripts{   
+    <script src="~/Scripts/UrlAddress/UrlService.js"></script>
+    <script src="~/Scripts/UrlAddress/Manage.js"></script>
+}
+
+
+
+

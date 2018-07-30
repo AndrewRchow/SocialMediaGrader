@@ -1,0 +1,157 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+<style>
+    ul[dnd-list] {
+        min-height: 42px;
+        padding: 0;
+    }
+
+        ul[dnd-list] > li {
+            display: block;
+            padding: 10px 15px;
+        }
+
+            ul[dnd-list] > li.dndDraggingSource {
+                display: none;
+            }
+
+            ul[dnd-list] > li.dndPlaceholder {
+                background-color: #ddd;
+                min-height: 42px;
+            }
+
+    .panel .panel-body {
+        padding: 0;
+    }
+
+    .goToTop {
+        position: fixed;
+        width: 100px;
+        height: 45px;
+        bottom: 10px;
+        left: 225px;
+        z-index: 100000;
+        cursor: pointer;
+        margin: 35px;
+        opacity: .80;
+        filter: alpha(opacity=80);
+    }
+</style>
+<link href="~/Content/plugins/toastr/angular-toastr.css" rel="stylesheet" />
+<div>
+    <div ng-controller="IndexController as IndexCtr">
+        <!-- Heading -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2><i class="fa fa-user-secret" aria-hidden="true"></i> Privacy Policy</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/Admin/Home/Index">Admin</a>
+                    </li>
+                    <li class="active">
+                        <strong>Privacy Policy</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+        <!-- End Heading -->
+        <!-- Wrapper Content -->
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content mailbox-content">
+                            <div class="file-manager">
+                                <a class="btn btn-block btn-primary compose-mail" ng-click="IndexCtr.postButton()">Add New Entry</a>
+                                <div class="space-25"></div>
+                                <a class="btn btn-block btn-info compose-mail" ng-click="IndexCtr.changeOrderButton()">Submit Order Change</a>
+                                <div class="space-25"></div>
+                                <a class="btn btn-block btn-warning compose-mail" ng-click="IndexCtr.viewsButton()">Go To Policy</a>
+                                <div class="space-25"></div>
+                                <!-- Add heading and button elements here -->
+                            </div>
+                            <br />
+                            <br />
+                            <div>
+                                <input type="button" class="goToTop" value="Scroll to Top"
+                                       style="display:none;border-radius:20px; background-color:rgb(26, 179, 148); color:white" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left Column End -->
+                <!-- Drag and Drop Column -->
+                <div class="col-lg-9 animated fadeInRight">
+                    <div class="row">
+                        <ul class="col-lg-10 unorderedList" dnd-list dnd-drop="callback({targetList: IndexCtr.allPolicies, targetIndex: index})">
+                            <!-- Box Start -->
+                            <li class="ibox" ng-repeat="x in IndexCtr.allPolicies"
+                                dnd-draggable="null" dnd-callback="onDrop(IndexCtr.allPolicies, $index, targetList, targetIndex)"
+                                style="max-height:200px; overflow:hidden">
+                                <div id="anchor{{x.displayOrder}}"></div>
+                                <div class="ibox-title">
+                                    <h5 ng-cloak>{{x.title}}</h5>
+                                    <p class="hidden">{{x.id}}</p>
+                                    <div class="ibox-tools">
+                                        
+                                        <a href="" class="label label-danger pull-right" ng-click="IndexCtr.deleteButton(x.id, $index)">Delete</a>
+                                        <a href="" class="label label-primary pull-right" ng-click="IndexCtr.editButton(x.id)">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <h2></h2>
+                                    <p ng-bind-html="x.description">
+                                    </p>
+                                </div>
+                            </li>
+                            <!-- Box End -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- Drag and Drop Column End -->
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/summernoteStyles")
+}
+
+@section scripts {
+    <script src="~/Scripts/PrivacyPolicy/IndexController.js"></script>
+    <script src="~/Scripts/PrivacyPolicy/PrivacyService.js"></script>
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/summernote")
+    <script type="text/javascript">
+        $(document).ready(function () {    /*for template styling*/
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+        $(window).scroll(function () {      /*for scrollToTop button*/
+            if ($(this).scrollTop() > 100) {
+                $('.goToTop').fadeIn();
+            } else {
+                $('.goToTop').fadeOut();
+            }
+        });
+        $('.goToTop').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 100);
+            return false;
+        });
+    </script>
+}
+
+
+

@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Meta Data Admin Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+<!-- Page Controller -->
+<div ng-controller="metaIndexController as metaVm">
+    <!-- Heading -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-database"></i> Meta Data</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/admin/home/index">Admin</a>
+                </li>
+                <li class="active">
+                   <strong>Meta</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <!-- End Heading -->
+    <!-- Wrapper Content -->
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        Meta Data Url List
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- Ibox Heading -->
+                                    <form>
+                                        <div class="form-group col-sm-5">
+                                            <span class="label label-default">Search/Filter</span>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                                <input type="text" class="form-control" placeholder="Search" ng-model="search">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7"></div>
+                                    </form>
+                                    <!-- End Ibox Heading -->
+                                    <!-- Table -->
+                                    <table class="table table-hover table-condensed table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-address-card-o" aria-hidden="true"></i> ID
+                                                        <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'url'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> Page Name
+                                                        <span ng-show="sortType == 'url' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'url' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-book" aria-hidden="true"></i> Page Url
+                                                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th><i class="fa fa-eye" aria-hidden="true"></i> Meta Tags</th>
+                                                <th><i class="fa fa-ban" aria-hidden="true"></i> Lock</th>
+                                                <th><i class="fa fa-edit" aria-hidden="true"></i> Edit</th>
+                                                <th><i class="fa fa-trash" aria-hidden="true"></i> Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr dir-paginate="item in metaVm.items|orderBy:sortType:sortReverse|filter:search|itemsPerPage:display" ng-cloak>
+                                                <td><strong>{{item.id}}</strong></td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.url}}</td>
+                                                <td>
+                                                    <a class="label label-primary" href="" ng-click="metaVm.view(item.id)">View</a>
+                                                </td>
+                                                <td>
+                                                    <a href="" class="label label-default" ng-show="!item.isLocked" ng-click="metaVm.lock(item.id, item.isLocked, $index)">
+                                                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="" class="label label-default" ng-show="item.isLocked" ng-click="metaVm.unlock(item.id, item.isLocked, $index)">
+                                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a data-toggle="modal" class="label label-warning" ng-show="!item.isLocked" href="#modal-form" ng-click="metaVm.edit(item, $index)"><i class="fa fa-edit"></i></a>
+                                                    <i class="fa fa-ban" ng-show="item.isLocked"></i>
+                                                </td>
+                                                <td>
+                                                    <a class="label label-danger" href="" ng-show="!item.isLocked" ng-click="metaVm.delete(item.id, $index)"><i class="fa fa-trash"></i></a>
+                                                    <i class="fa fa-ban" ng-show="item.isLocked"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-inline" align="center">
+                                        <a data-toggle="modal" class="btn btn-sm btn-primary pull-left" href="#modal-form" ng-click="metaVm.newAdd()">Add New Url</a>
+                                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                                    </div>
+                                    <!-- End Table -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Wrapper Content -->
+    <!-- Modal Form -->
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 b-r">
+                            <h3 class="m-t-none m-b">Meta Data Url</h3>
+                            <p>Add new meta data url to list.</p>
+                            <form role="form" name="modalForm" novalidate>
+                                <div class="form-group" ng-class="{'has-error':modalForm.name.$invalid && modalForm.name.$dirty}">
+                                    <label>Name</label>
+                                    <input type="text" placeholder="Enter Name" class="form-control" name="name" ng-model="metaVm.item.name" required>
+                                    <span ng-show="modalForm.name.$error.required && modalForm.name.$dirty" class="help-block">Name is required</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':modalForm.url.$invalid && modalForm.url.$dirty}">
+                                    <label>Url</label>
+                                    <input type="text" placeholder="Enter Url" class="form-control" name="url" ng-model="metaVm.item.url" ng-pattern="/^\/[a-z0-9_\/]+$/i" required>
+                                    <span ng-show="modalForm.url.$error.required && modalForm.url.$dirty" class="help-block">Url is required</span>
+                                    <span ng-show="modalForm.url.$error.pattern" class="help-block">Please enter a valid url path. Ex: "/example"</span>
+                                </div>
+                                <div>
+                                    <button data-toggle="modal" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" href="#modal-form" 
+                                           ng-disabled="modalForm.$invalid" ng-click="metaVm.addUrl()"><strong>Submit</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Form -->
+</div>
+@section Scripts {
+    <script src="~/Scripts/Meta/MetaIndexController.js"></script>
+    <script src="~/Scripts/GenericService.js"></script>
+}

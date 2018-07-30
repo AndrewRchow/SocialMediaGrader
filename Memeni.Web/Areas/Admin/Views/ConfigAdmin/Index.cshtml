@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+<style>
+    .table_legenda th {
+        width: 5px;
+        word-wrap: break-word;
+    }
+
+    td {
+        word-break: break-all;
+        table-layout: fixed;
+    }
+</style>
+<body ng-controller="IndexController as IndexCtrl">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-cog"></i> Configuration Settings</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/admin/home/index">Admin</a>
+                </li>
+                <li class="active">
+                    <strong>Config</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        Configuration Table
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form>
+                                        <div class="form-group col-sm-5">
+                                            <span class="label label-default">Search/Filter</span>
+                                            <div class="input-group">
+                                                <div class="input-group-addon" ng-click="IndexCtrl.searchTerm(searchText)"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                                <input type="text" class="form-control" placeholder="Search" ng-model="search">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            @* add showing n of n *@
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <span class="label label-default">Display per Page</span>
+                                            <select class="form-control" ng-model="display" ng-change="IndexCtrl.displyPage(display)" ng-init="display = 10">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-12">
+                                    <div style="overflow-x:auto;">
+                                        <table class="table_legenda table table-hover table-condensed table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a href="#" ng-click="sortType = 'configName'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                            <i class="fa fa-cog" aria-hidden="true"></i> Config Name
+                                                            <span ng-show="sortType == 'configName' && !sortReverse" class="fa fa-caret-down"></span>
+                                                            <span ng-show="sortType == 'configName' && sortReverse" class="fa fa-caret-up"></span>
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" ng-click="sortType = 'configValue'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                            <i class="fa fa-cogs" aria-hidden="true"></i> Config Value
+                                                            <span ng-show="sortType == 'configValue' && !sortReverse" class="fa fa-caret-down"></span>
+                                                            <span ng-show="sortType == 'configValue' && sortReverse" class="fa fa-caret-up"></span>
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                            <i class="fa fa-info" aria-hidden="true"></i> Description
+                                                            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                                                            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                                                        </a>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" ng-click="sortType = 'dataTypeName'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                            <i class="fa fa-superpowers" aria-hidden="true"></i> Category
+                                                            <span ng-show="sortType == 'dataTypeName' && !sortReverse" class="fa fa-caret-down"></span>
+                                                            <span ng-show="sortType == 'dataTypeName' && sortReverse" class="fa fa-caret-up"></span>
+                                                        </a>
+                                                    </th>
+                                                    <th><i class="fa fa-database" aria-hidden="true"></i>Data Type</th>
+                                                    <th><i class="fa fa-edit" aria-hidden="true"></i> Edit</th>
+                                                    <th class="hidden"><i class="fa fa-trash" aria-hidden="true"></i> Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in IndexCtrl.allSettings">
+                                                <tr dir-paginate="item in IndexCtrl.allSettings|orderBy:sortType:sortReverse|filter:search|itemsPerPage:display" ng-cloak>
+                                                    <td class="hidden"><strong>{{item.id}}</strong></td>
+                                                    <td>{{item.configName}}</td>
+                                                    <td>{{item.configValue}}</td>
+                                                    <td>{{item.description}}</td>
+                                                    <td>{{item.categoryName}}</td>
+                                                    <td>{{item.dataTypeName}}</td>
+                                                    <td class="hidden">{{item.createdDate}}</td>
+                                                    <td class="hidden">{{item.modifiedDate}}</td>
+                                                    <td class="hidden">{{item.modifiedBy}}</td>
+                                                    <td>
+                                                        <a href="" class="label label-warning" ng-click="IndexCtrl.editBtn(item.id)">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a href="" class="label label-danger hidden" ng-click="IndexCtrl.deleteSettingsBtn(item.id, $index)">
+                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row-inline" align="center">
+                                    <button class="btn btn-sm btn-primary pull-left" type="button" ng-click="IndexCtrl.postBtn()">Add New Item</button>
+                                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section scripts{
+
+
+    @Scripts.Render("~/bundles/config")
+
+}
+

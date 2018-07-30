@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .thumb {
+        width: 25%;
+    }
+</style>
+
+<div class="container ng-cloak" ng-controller="imageController as imgCtrl">
+
+    <!-- Unify Primary Outline Panel-->
+    <div class="card g-brd-primary rounded-0">
+        <h3 class="card-header h5 text-white g-bg-primary g-brd-transparent rounded-0">
+            @*<i class="fa fa-tasks g-font-size-default g-mr-5"></i>*@ File Uploader
+        </h3>
+        <div class="card-block">
+
+            <form name="myForm">
+                <fieldset>
+                    <div class="col-md-9">
+                        <label>Logo</label>
+                        <input type="file" ngf-select ng-model="picFile" name="file"
+                               accept="image/*" ngf-max-size="2MB"
+                               ngf-model-invalid="errorFile">
+                    </div>
+                    <div class="col-md-9">
+                        <img @*ng-show="myForm.file.$valid"*@ ngf-thumbnail="picFile" class="thumb">
+                    </div>
+                    <button type="button" class="btn btn-outline-success btn-sm pull-right" name="saveLogo" ng-click="imgCtrl.saveLogo(picFile)" @*ng-click="uploadPic(picFile)"*@>
+                        Save
+                    </button>
+                    @*<span ng-show="picFile.result"></span>*@
+                </fieldset>
+            </form>
+
+        </div>
+        <div class="card-footer"><a href="/user/home/index">Return to profile</a></div>
+    </div>
+    <!-- End Unify Primary Outline Panel-->
+</div>
+
+@section scripts{
+    <script src="~/Scripts/UserIndex/ImageController.js"></script>
+    <script src="~/Scripts/GenericService.js"></script>
+}
+

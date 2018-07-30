@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+<style>
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+    }
+</style>
+<section class="g-bg-secondary g-py-100" ng-controller="emailController as emailCtrl">
+    <div class="container">
+        <div class="text-center g-mb-50" ng-show="!emailCtrl.confirmed" ng-cloak>
+            <h2 class="h4 g-mb-0">Thank You For <span class="g-color-primary g-ml-5">Signing Up!</span><br /><span class="g-color-primary g-ml-5">Please</span> Check Your Inbox!</h2>          
+        </div>
+        <div class="text-center g-mb-50" ng-show="emailCtrl.confirmed" ng-cloak>
+            <h2 class="h4 g-mb-0">Email Successfully <span class="g-color-primary g-ml-5">Confirmed!</span></h2>
+        </div>
+        <div>
+            <!-- Static Process -->
+            <div class="row">
+                <div class="col-sm-6 col-lg-4 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <span class="u-icon-v2 u-icon-size--3xl g-brd-7 g-brd-gray-light-v4 g-color-primary g-rounded-50x g-mb-25 g-bg-white">
+                            <i class="icon-hotel-restaurant-002 u-line-icon-pro"></i>
+                        </span>
+                        <h3 class="h5 g-font-weight-600 g-mb-10">Sign Up</h3>
+                        <i class="u-dot-line-v1-2 g-brd-transparent--before g-brd-gray-light-v2--after g-mt-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-bg-primary--before g-brd-gray-light-v2"></span>
+                        </i>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+
+                <div class="col-sm-6 col-lg-4 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <span class="u-icon-v2 u-icon-size--3xl g-brd-7 g-brd-gray-light-v4 g-color-primary g-rounded-50x g-mb-25 g-bg-white">
+                            <i class="icon-education-171 u-line-icon-pro"></i>
+                        </span>
+                        <h3 class="h5 g-font-weight-600 g-mb-10">Check Your Email for Confirmation</h3>
+                        <i class="u-dot-line-v2-2 g-brd-gray-light-v2--before g-brd-gray-light-v2--after g-mt-20">
+                            <span ng-cloak class="u-dot-line-v1__inner g-bg-white g-brd-gray-light-v2" ng-class="{'g-bg-primary--before': emailCtrl.confirmed}"></span> <!-- g-bg-primary--before-->
+                        </i>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+
+                <div class="col-sm-6 col-lg-4 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <span class="u-icon-v2 u-icon-size--3xl g-brd-7 g-brd-gray-light-v4 g-color-primary g-rounded-50x g-mb-25 g-bg-white">
+                            <i class="icon-finance-178 u-line-icon-pro"></i>
+                        </span>
+                        <h3 class="h5 g-font-weight-600 g-mb-10">Access the User Dashboard!</h3>
+                        <i class="u-dot-line-v1-2 g-brd-gray-light-v2--before g-brd-transparent--after g-mt-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-brd-gray-light-v2"></span>
+                        </i>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+            </div>
+            <!-- End Static Process -->
+            <!-- Resend Button -->
+            <div align="center">
+                <a href="#" ng-click="emailCtrl.resendEmail()" ng-cloak ng-show="!emailCtrl.confirmed" class="btn btn-xl u-btn-outline-primary u-btn-content g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-mr-10 g-mb-15">
+                    <span class="float text-center">
+                        Resend Confirmation Email
+                    </span>
+                </a>
+            </div>      
+            <!-- Resend Button -->
+            <!-- Login Button -->
+            <div align="center">
+                <a href="/User/Home/Index" ng-cloak ng-show="emailCtrl.confirmed" class="btn btn-xl u-btn-outline-primary u-btn-content g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-mr-10 g-mb-15">
+                    <span class="float text-center">
+                        Go to Dashboard
+                    </span>
+                </a>
+            </div>
+            <!-- Login Button -->
+            <!-- Success Alert -->
+            <div align="center">
+                <div ng-show="emailCtrl.emailSent" ng-cloak class="alert alert-success alert-dismissible fade show col-sm-4" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="emailCtrl.emailSent != emailCtrl.emailSent">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="media">
+                        <span class="d-flex mr-2 g-mt-5">
+                            <i class="fa fa-check-circle-o"></i>
+                        </span>
+                        <div class="media-body">
+                            <strong>Email Sent!</strong> Check your inbox.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Success Alert -->
+            <!-- Danger Alert -->
+            <div align="center">
+                <div ng-show="emailCtrl.emailError" ng-cloak class="alert alert-danger alert-dismissible fade show col-sm-4" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="emailCtrl.emailError != emailCtrl.emailError">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="media">
+                        <span class="d-flex mr-2 g-mt-5">
+                            <i class="fa fa-minus-circle"></i>
+                        </span>
+                        <div class="media-body">
+                            <strong>Error!</strong> Please try again at a later time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Danger Alert -->
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/EmailMessage/EmailController.js"></script>
+    <script src="~/Scripts/EmailMessage/EmailMessageService.js"></script>
+}

@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_1.cshtml";
+}
+
+<body ng-controller="IndexFaqController as FaqIndexCtrl">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><i class="fa fa-list" aria-hidden="true"></i> FAQs</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/Admin/Home/Index">Admin</a>
+                </li>
+                <li class="active">
+                    <strong>FAQs</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        Faqs Table
+                    </div>
+                    <div class="ibox-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form>
+                                        <div class="form-group col-lg-5">
+                                            <span class="label label-default">Search/Filter</span>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                                <input type="text" class="form-control" placeholder="Search" ng-model="search">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-5" align="center">
+                                            @*<h5 ng-cloak>Showing {{FaqIndexCtrl.showingFirst}} - {{FaqIndexCtrl.showingLast}} of {{FaqIndexCtrl.item}} Settings</h5>*@
+                                            <button class="label label-default" ng-cloak ng-show="userIndexCtrl.item.recordsTotal>IndexCtrl.item" ng-click="FaqIndexCtrl.resetFilter()">Reset Filter</button>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <span class="label label-default">Display per Page</span>
+                                            <select class="form-control" ng-model="display" ng-change="FaqIndexCtrl.displyPage(display)" ng-init="display = 10">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <table class="table_legenda table table-hover table-condensed table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-bars" aria-hidden="true"></i> Title
+                                                        <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-info" aria-hidden="true"></i> Description
+                                                        <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'displayOrder'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-sort" aria-hidden="true"></i> Display Order
+                                                        <span ng-show="sortType == 'displayOrder' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'displayOrder' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" ng-click="sortType = 'categoryId'; sortReverse = !sortReverse" style="text-decoration:none; color:inherit;">
+                                                        <i class="fa fa-superpowers" aria-hidden="true"></i> Category Name
+                                                        <span ng-show="sortType == 'categoryId' && !sortReverse" class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'categoryId' && sortReverse" class="fa fa-caret-up"></span>
+                                                    </a>
+                                                </th>
+                                                <th><i class="fa fa-edit" aria-hidden="true"></i> Edit</th>
+                                                <th class="hidden"><i class="fa fa-trash" aria-hidden="true"></i> Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in FaqIndexCtrl.allFaqs">
+                                            <tr dir-paginate="item in FaqIndexCtrl.allFaqs|orderBy:sortType:sortReverse|filter:search|itemsPerPage:display" ng-cloak>
+                                                <td class="hidden"><strong>{{item.id}}</strong></td>
+                                                <td>{{item.title}}</td>
+                                                <td>{{item.description}}</td>
+                                                <td>{{item.displayOrder}}</td>
+                                                <td>{{item.displayName}}</td>
+                                                <td class="hidden">{{item.createdDate}}</td>
+                                                <td class="hidden">{{item.modifiedDate}}</td>
+                                                <td class="hidden">{{item.modifiedBy}}</td>
+                                                <td>
+                                                    <a href="" ng-click="FaqIndexCtrl.editBtn(item.id)" class="label label-warning">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="" class="label label-danger hidden" IndexCtrl.deleteSettingsBtn(item.id, $index)">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row-inline" align="center">
+                                        <ul class="pagination">
+                                            <li><a href="#" ng-class="{'disabled': IndexCtrl.config[0].displayStart == 0}" ng-click="IndexCtrl.pagination('start')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" ng-class="{'disabled': IndexCtrl.config[0].displayStart == 0}" ng-click="IndexCtrl.pagination('previous')"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" class="disabled" ng-cloak>{{userIndexCtrl.page}}</a></li>
+                                            <li><a href="#" ng-class="{'disabled': IndexCtrl.showingLast == IndexCtrl.item}" ng-click="IndexCtrl.pagination('next')"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" ng-class="{'disabled': IndexCtrl.showingLast == IndexCtrl.item}" ng-click="IndexCtrl.pagination('end')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                        <div class="pull-left">
+                                            <button class="btn btn-sm btn-primary" type="button" ng-click="FaqIndexCtrl.postBtn()">Add New Item</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section scripts{
+
+
+    @Scripts.Render("~/bundles/faq")
+    <script src="~/Scripts/GenericService.js"></script>
+}
+

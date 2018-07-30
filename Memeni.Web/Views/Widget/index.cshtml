@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "Widget";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+
+<html lang="en" ng-app="mainApp">
+<head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- title -->
+    <title>widget</title>
+
+    <!-- css scripts -->
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .box1 {
+            background-color: white;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        img {
+            border-radius: 50%;
+            height: 27px;
+            width: 27px;
+            filter: grayscale(100%);
+        }
+
+        #profilePic {
+            filter: grayscale(0%);
+            height: 50px;
+            width: 50px;
+            border-radius: 15%;
+        }
+    </style>
+
+</head>
+
+<body layout="column" layout-margin layout-align="center stretch" ng-controller="widgetController as widgetCtrl" ng-cloak>
+
+    <section flex="100" class="box1" layout-padding>
+        <md-toolbar class="_md _md-toolbar-transitions" style="background-color:rgb(11, 90, 133);">
+            <span flex></span>
+            <h2 class="md-title text-center">Memeni Widget</h2>
+            <span flex></span>
+        </md-toolbar>
+        <!-- Input Fields -->
+        <div style="margin-top:0;margin-bottom:0">
+            <p class="md-caption"><strong>Enter your url to see how to increase your reach to potential leads!</strong></p>
+            <div class="form-group">
+                <input type="text" ng-model="widgetCtrl.urlInput" class="form-control" autocomplete="off" spellcheck="false" placeholder="www.facebook.com/yourpageurl">
+            </div>
+            <p class="md-caption"><strong>Or if you don't want to enter your info...</strong></p>
+            <div class="form-group">
+                <input type="text" ng-model="widgetCtrl.likesInput" class="form-control" autocomplete="off" spellcheck="false" placeholder="simply enter the number of likes!">
+            </div>
+            <button ng-click="widgetCtrl.getFacebookInfo()" class="md-button md-raised" style="background-color:rgb(11, 90, 133);color:white;">Submit</button>
+        </div>
+        <!-- End Input Fields -->
+        <md-slider-container class="_md">
+            <div flex="10" layout="" layout-align="center center" class="layout-align-center-center layout-row flex-10">
+                <span class="md-body-1"><strong>Reach</strong></span>
+            </div>
+            <md-slider id="reachSlider" ng-click="widgetCtrl.reachSliderClick()" ng-model="widgetCtrl.reachVal" min="0" max="100"
+                       aria-label="regular slider" flex=""
+                       class="ng-pristine ng-untouched ng-valid ng-isolate-scope flex ng-not-empty"
+                       aria-valuemin="0" aria-valuenow="52" aria-valuemax="100"
+                       aria-invalid="false" style="">
+                <div class="md-slider-wrapper" tabindex="0" role="slider" style="touch-action: pan-y;">
+                    <div class="md-slider-content">
+                        <div class="md-track-container">
+                            <div class="md-track"></div>
+                            <div class="md-track md-track-fill" style="width: 52%;"></div>
+                            <div class="md-track-ticks"></div>
+                        </div>
+                        <div class="md-thumb-container" style="left: 52%;">
+                            <div class="md-thumb"></div>
+                            <div class="md-focus-thumb"></div>
+                            <div class="md-focus-ring"></div>
+                            <div class="md-sign">
+                                <span class="md-thumb-text">52</span>
+                            </div>
+                            <div class="md-disabled-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+            </md-slider>
+        </md-slider-container>
+        <md-slider-container class="_md" style="padding-top:0">
+            <div flex="10" layout="" layout-align="center center" class="layout-align-center-center layout-row flex-10">
+                <span class="md-body-1"><strong>Budget</strong></span>
+            </div>
+            <md-slider id="budgetSlider" ng-click="widgetCtrl.budgetSliderClick()" ng-model="widgetCtrl.budgetVal" min="0" max="10000"
+                       aria-label="regular slider" flex=""
+                       class="ng-pristine ng-untouched ng-valid ng-isolate-scope flex ng-not-empty"
+                       aria-valuemin="0" aria-valuenow="52" aria-valuemax="100"
+                       aria-invalid="false" style="">
+                <div class="md-slider-wrapper" tabindex="0" role="slider" style="touch-action: pan-y;">
+                    <div class="md-slider-content">
+                        <div class="md-track-container">
+                            <div class="md-track"></div>
+                            <div class="md-track md-track-fill" style="width: 52%;"></div>
+                            <div class="md-track-ticks"></div>
+                        </div>
+                        <div class="md-thumb-container" style="left: 52%;">
+                            <div class="md-thumb"></div>
+                            <div class="md-focus-thumb"></div>
+                            <div class="md-focus-ring"></div>
+                            <div class="md-sign">
+                                <span class="md-thumb-text">52</span>
+                            </div>
+                            <div class="md-disabled-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+            </md-slider>
+        </md-slider-container>
+        <div layout="column" layout-align="center center">
+            <p><strong>{{widgetCtrl.name}}</strong></p>
+            <img id="profilePic" ng-src="{{widgetCtrl.profilePic}}" hidden/>
+        </div>
+            <div layout="row" layout-align="space-around center" id="realDisplay" class="hide" >
+                <p><strong>Budget:</strong><br /> ${{widgetCtrl.budgetVal}}</p>
+                <p><strong>Reach:</strong><br /> {{widgetCtrl.reachVal}}%</p>
+                <p><strong>Likes:</strong><br /> {{widgetCtrl.maxReach}}</p>
+            </div>
+            <div layout="row" layout-align="space-around center" id="dummyDisplay">
+                <p><strong>Budget:</strong><br /> $0</p>
+                <p><strong>Reach:</strong><br /> 0%</p>
+                <p><strong>Likes:</strong><br /> 0</p>
+            </div>
+        <div id="pictureContainer" hidden>
+            <img id="img0" ng-src="{{widgetCtrl.photoUrls[0]}}" />
+            <img id="img1" ng-src="{{widgetCtrl.photoUrls[1]}}" />
+            <img id="img2" ng-src="{{widgetCtrl.photoUrls[2]}}" />
+            <img id="img3" ng-src="{{widgetCtrl.photoUrls[3]}}" />
+            <img id="img4" ng-src="{{widgetCtrl.photoUrls[4]}}" />
+            <img id="img5" ng-src="{{widgetCtrl.photoUrls[5]}}" />
+            <img id="img6" ng-src="{{widgetCtrl.photoUrls[6]}}" />
+            <img id="img7" ng-src="{{widgetCtrl.photoUrls[7]}}" />
+            <img id="img8" ng-src="{{widgetCtrl.photoUrls[8]}}" />
+            <img id="img9" ng-src="{{widgetCtrl.photoUrls[9]}}" />
+            <img id="img10" ng-src="{{widgetCtrl.photoUrls[10]}}" />
+            <img id="img11" ng-src="{{widgetCtrl.photoUrls[11]}}" />
+            <img id="img12" ng-src="{{widgetCtrl.photoUrls[12]}}" />
+            <img id="img13" ng-src="{{widgetCtrl.photoUrls[13]}}" />
+            <img id="img14" ng-src="{{widgetCtrl.photoUrls[14]}}" />
+            <img id="img15" ng-src="{{widgetCtrl.photoUrls[15]}}" />
+            <img id="img16" ng-src="{{widgetCtrl.photoUrls[16]}}" />
+            <img id="img17" ng-src="{{widgetCtrl.photoUrls[17]}}" />
+            <img id="img18" ng-src="{{widgetCtrl.photoUrls[18]}}" />
+            <img id="img19" ng-src="{{widgetCtrl.photoUrls[19]}}" />
+            <img id="img20" ng-src="{{widgetCtrl.photoUrls[20]}}" />
+            <img id="img21" ng-src="{{widgetCtrl.photoUrls[21]}}" />
+            <img id="img22" ng-src="{{widgetCtrl.photoUrls[22]}}" />
+            <img id="img23" ng-src="{{widgetCtrl.photoUrls[23]}}" />
+            <img id="img24" ng-src="{{widgetCtrl.photoUrls[24]}}" />
+            <img id="img25" ng-src="{{widgetCtrl.photoUrls[25]}}" />
+            <img id="img26" ng-src="{{widgetCtrl.photoUrls[26]}}" />
+            <img id="img27" ng-src="{{widgetCtrl.photoUrls[27]}}" />
+            <img id="img28" ng-src="{{widgetCtrl.photoUrls[28]}}" />
+            <img id="img29" ng-src="{{widgetCtrl.photoUrls[29]}}" />
+            <img id="img30" ng-src="{{widgetCtrl.photoUrls[30]}}" />
+            <img id="img31" ng-src="{{widgetCtrl.photoUrls[31]}}" />
+            <img id="img32" ng-src="{{widgetCtrl.photoUrls[32]}}" />
+            <img id="img33" ng-src="{{widgetCtrl.photoUrls[33]}}" />
+            <img id="img34" ng-src="{{widgetCtrl.photoUrls[34]}}" />
+            <img id="img35" ng-src="{{widgetCtrl.photoUrls[35]}}" />
+            <img id="img36" ng-src="{{widgetCtrl.photoUrls[36]}}" />
+            <img id="img37" ng-src="{{widgetCtrl.photoUrls[37]}}" />
+            <img id="img38" ng-src="{{widgetCtrl.photoUrls[38]}}" />
+            <img id="img39" ng-src="{{widgetCtrl.photoUrls[39]}}" />
+            <img id="img40" ng-src="{{widgetCtrl.photoUrls[40]}}" />
+            <img id="img41" ng-src="{{widgetCtrl.photoUrls[41]}}" />
+            <img id="img42" ng-src="{{widgetCtrl.photoUrls[42]}}" />
+            <img id="img43" ng-src="{{widgetCtrl.photoUrls[43]}}" />
+            <img id="img44" ng-src="{{widgetCtrl.photoUrls[44]}}" />
+            <img id="img45" ng-src="{{widgetCtrl.photoUrls[45]}}" />
+            <img id="img46" ng-src="{{widgetCtrl.photoUrls[46]}}" />
+            <img id="img47" ng-src="{{widgetCtrl.photoUrls[47]}}" />
+            <img id="img48" ng-src="{{widgetCtrl.photoUrls[48]}}" />
+            <img id="img49" ng-src="{{widgetCtrl.photoUrls[49]}}" />
+        </div>
+    </section>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <!-- angular module -->
+    @Scripts.Render("~/bundles/mainapp")
+    @Scripts.Render("~/bundles/widget")
+
+</body>
+</html>
+
